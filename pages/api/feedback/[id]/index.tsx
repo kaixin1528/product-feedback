@@ -21,7 +21,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
   switch (req.method) {
     case "GET":
-      return res.status(200).json(currentFeedback);
+      return res.status(200).json(JSON.stringify(currentFeedback));
     case "POST":
       const comment = req.body;
       let totalComments = 0;

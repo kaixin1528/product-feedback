@@ -17,7 +17,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const productFeedback = data.productRequests;
   switch (req.method) {
     case "GET":
-      return res.status(200).json(data);
+      return res.status(200).json(JSON.stringify(data));
     case "POST":
       const feedback = req.body;
       const id = productFeedback.length > 0 ? productFeedback.at(-1).id + 1 : 1;
