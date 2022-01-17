@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Menu from "../components/Menu";
 import TabletMenu from "../components/TabletMenu";
 import { url } from "../lib/Constant";
+import data from "../data.json";
 
 export type FeedbackData = {
   id: number;
@@ -98,10 +99,11 @@ export default function Home({ feedback }) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const res = await fetch(`${url}/api`, {
-    method: "GET",
-  });
-  const feedback = await res.json();
+  // const res = await fetch(`${url}/api`, {
+  //   method: "GET",
+  // });
+  // const feedback = await res.json();
+  const feedback = data;
 
   return {
     props: {

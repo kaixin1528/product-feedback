@@ -4,6 +4,7 @@ import StatusButton from "../components/StatusButton";
 import StatusFeedback from "../components/StatusFeedback";
 import { useState } from "react";
 import { url } from "../lib/Constant";
+import data from "../data.json";
 
 const Roadmap = ({ feedback }) => {
   const [status, setStatus] = useState("in-progress");
@@ -67,8 +68,9 @@ const Roadmap = ({ feedback }) => {
 export default Roadmap;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const res = await fetch(`${url}/api`);
-  const feedback = await res.json();
+  // const res = await fetch(`${url}/api`);
+  // const feedback = await res.json();
+  const feedback = data;
 
   return {
     props: {
