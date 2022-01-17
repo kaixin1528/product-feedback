@@ -113,7 +113,7 @@ const Index = ({ currentFeedback, id }) => {
         : (currentFeedback["comments"] = [{ id, ...comment }]);
     }
 
-    // fs.writeFileSync("./data.json", JSON.stringify(data));
+    fs.writeFileSync("./data.json", JSON.stringify(data));
 
     window.location.reload();
   };
