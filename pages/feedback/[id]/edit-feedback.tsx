@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { url } from "../../../lib/Constant";
 
 const EditFeedback = () => {
   const router = useRouter();
@@ -17,7 +18,6 @@ const EditFeedback = () => {
   const [detail, setDetail] = useState(router.query.detail);
   const [openCategory, setOpenCategory] = useState(false);
   const [openStatus, setOpenStatus] = useState(false);
-
   const [action, setAction] = useState("");
 
   const handleSubmit = async (e) => {
@@ -26,7 +26,7 @@ const EditFeedback = () => {
     console.log(action);
 
     if (action === "save") {
-      fetch(`http://localhost:3000/api/feedback/${id}`, {
+      fetch(`${url}/api/feedback/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -41,15 +41,17 @@ const EditFeedback = () => {
         }),
       })
         .then((res) => res.json())
-        .then(() => router.push(`http://localhost:3000/feedback/${id}`));
+        .then(() => router.push(`${url}/feedback/${id}`));
     } else if (action === "delete") {
-      const url = ["planned", "in-progress", "live"].includes(status.toString())
-        ? "http://localhost:3000/roadmap"
-        : "http://localhost:3000";
-      fetch(`http://localhost:3000/api/feedback/${id}`, {
+      const currentUrl = ["planned", "in-progress", "live"].includes(
+        status.toString()
+      )
+        ? `${url}/roadmap`
+        : `${url}`;
+      fetch(`${url}/api/feedback/${id}`, {
         method: "DELETE",
       })
-        .then(() => router.push(url))
+        .then(() => router.push(currentUrl))
         .then(() => window.location.reload());
     }
   };

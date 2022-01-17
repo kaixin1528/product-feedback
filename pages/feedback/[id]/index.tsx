@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import AddFeedbackButton from "../../../components/AddFeedbackButton";
+import { url } from "../../../lib/Constant";
 
 export type FeedbackData = {
   id: number;
@@ -43,7 +44,7 @@ const Index = ({ currentFeedback, id }) => {
   ) => {
     e.preventDefault();
 
-    fetch("http://localhost:3000/api", {
+    fetch(`${url}/api`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -59,7 +60,7 @@ const Index = ({ currentFeedback, id }) => {
   };
 
   const handleSubmit = async (e) => {
-    fetch(`http://localhost:3000/api/feedback/${id}`, {
+    fetch(`${url}/api/feedback/${id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -104,7 +105,7 @@ const Index = ({ currentFeedback, id }) => {
       </header>
       <section className='grid t:grid-cols-8 p-8 gap-4 text-sm text-left bg-white rounded-lg'>
         <motion.button
-          whileHover={{ backgroundColor: "#CFD7FF" }}
+          // whileHover={{ backgroundColor: "#CFD7FF" }}
           className={`group ${
             currentFeedback.upvoted
               ? "bg-ocean-blue text-white"
@@ -333,12 +334,9 @@ export default Index;
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const id = params.id;
-  const res: Response = await fetch(
-    `http://localhost:3000/api/feedback/${id}`,
-    {
-      method: "GET",
-    }
-  );
+  const res: Response = await fetch(`${url}/api/feedback/${id}`, {
+    method: "GET",
+  });
   const currentFeedback: FeedbackData = await res.json();
 
   return {

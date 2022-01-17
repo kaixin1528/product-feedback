@@ -1,11 +1,11 @@
 import Head from "next/head";
-import Link from "next/link";
 import { GetStaticProps } from "next";
 import SuggestionFeedback from "../components/SuggestionFeedback";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Menu from "../components/Menu";
 import TabletMenu from "../components/TabletMenu";
+import { url } from "../lib/Constant";
 
 export type FeedbackData = {
   id: number;
@@ -98,7 +98,9 @@ export default function Home({ feedback }) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const res = await fetch("http://localhost:3000/api", { method: "GET" });
+  const res = await fetch(`${url}/api`, {
+    method: "GET",
+  });
   const feedback = await res.json();
 
   return {

@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { url } from "../lib/Constant";
 
 const NewFeedback = ({}) => {
   const router = useRouter();
@@ -18,7 +19,7 @@ const NewFeedback = ({}) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    fetch("http://localhost:3000/api", {
+    fetch(`${url}/api`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
