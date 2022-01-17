@@ -26,7 +26,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       return res.status(200).json({});
     case "PUT":
       const params = req.body;
-      const currentFeedback: FeedbackData = productFeedback.filter(
+      const currentFeedback: any = productFeedback.filter(
         (feedback) => feedback.id === Number(params.id)
       )[0];
       currentFeedback.upvotes = Number(params.upvotes);

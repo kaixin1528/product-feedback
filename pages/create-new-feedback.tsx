@@ -9,10 +9,17 @@ import { url } from "../lib/Constant";
 import data from "../data.json";
 import fs from "fs";
 
+export type Feedback = {
+  title: string;
+  category: string;
+  upvotes: number;
+  status: string;
+  description: string;
+};
 const NewFeedback = ({}) => {
   const router = useRouter();
-  const filter: string | string[] =
-    router.query.filter === "" ? "feature" : router.query.filter;
+  const filter: string =
+    router.query.filter === "" ? "feature" : (router.query.filter as string);
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState(filter);
   const [detail, setDetail] = useState("");
@@ -36,7 +43,8 @@ const NewFeedback = ({}) => {
     // })
     //   .then((res) => res.json())
     //   .then(() => router.push("/"));
-    const feedback = {
+
+    const feedback: Feedback = {
       title: title,
       category: category,
       upvotes: 0,

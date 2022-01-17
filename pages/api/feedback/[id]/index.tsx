@@ -15,7 +15,7 @@ export type FeedbackData = {
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   let productFeedback = data.productRequests;
-  const currentFeedback: FeedbackData = productFeedback.filter(
+  const currentFeedback: any = productFeedback.filter(
     (feedback) => feedback.id === Number(req.query.id)
   )[0];
 

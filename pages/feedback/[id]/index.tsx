@@ -6,6 +6,8 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import AddFeedbackButton from "../../../components/AddFeedbackButton";
 import { url } from "../../../lib/Constant";
+import data from "../../../data.json";
+import fs from "fs";
 
 export type FeedbackData = {
   id: number;
@@ -39,41 +41,81 @@ const Index = ({ currentFeedback, id }) => {
   const handleUpvote = async (
     e,
     upvotes: number,
-    id: number,
+    currentId: number,
     upvoted: boolean
   ) => {
     e.preventDefault();
 
-    fetch(`${url}/api`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        id: id,
-        upvotes: upvoted ? upvotes - 1 : upvotes + 1,
-        upvoted: !upvoted,
-      }),
-    })
-      .then((res) => res.json())
-      .then(() => window.location.reload());
+    // fetch(`${url}/api`, {
+    //   method: "PUT",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     id: id,
+    //     upvotes: upvoted ? upvotes - 1 : upvotes + 1,
+    //     upvoted: !upvoted,
+    //   }),
+    // })
+    //   .then((res) => res.json())
+    //   .then(() => window.location.reload());
+    let productFeedback = data.productRequests;
+
+    const params = {
+      id: currentId,
+      upvotes: upvoted ? upvotes - 1 : upvotes + 1,
+      upvoted: !upvoted,
+    };
+    const currentFeedback: any = productFeedback.filter(
+      (feedback) => feedback.id === Number(params.id)
+    )[0];
+    currentFeedback.upvotes = Number(params.upvotes);
+    currentFeedback.upvoted = params.upvoted;
+    fs.writeFileSync("./data.json", JSON.stringify(data));
   };
 
   const handleSubmit = async (e) => {
-    fetch(`${url}/api/feedback/${id}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+    // fetch(`${url}/api/feedback/${id}`, {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     content: myComment,
+    //     user: {
+    //       image: "/assets/user-images/image-zena.jpg",
+    //       name: "Zena Kelley",
+    //       username: "velvetround",
+    //     },
+    //   }),
+    // }).then((res) => res.json());
+    let productFeedback = data.productRequests;
+    const comment = {
+      content: myComment,
+      user: {
+        image: "/assets/user-images/image-zena.jpg",
+        name: "Zena Kelley",
+        username: "velvetround",
       },
-      body: JSON.stringify({
-        content: myComment,
-        user: {
-          image: "/assets/user-images/image-zena.jpg",
-          name: "Zena Kelley",
-          username: "velvetround",
-        },
-      }),
-    }).then((res) => res.json());
+    };
+    let totalComments = 0;
+    productFeedback.map((feedback) => {
+      "comments" in feedback
+        ? (totalComments += feedback.comments.length)
+        : (totalComments += 0);
+    });
+
+    const id = totalComments + 1;
+
+    {
+      "comments" in currentFeedback
+        ? currentFeedback["comments"].push({ id, ...comment })
+        : (currentFeedback["comments"] = [{ id, ...comment }]);
+    }
+
+    fs.writeFileSync("./data.json", JSON.stringify(data));
+
+    window.location.reload();
   };
 
   return (
@@ -334,10 +376,15 @@ export default Index;
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const id = params.id;
-  const res: Response = await fetch(`${url}/api/feedback/${id}`, {
-    method: "GET",
-  });
-  const currentFeedback: FeedbackData = await res.json();
+  // const res: Response = await fetch(`${url}/api/feedback/${id}`, {
+  //   method: "GET",
+  // });
+  // const currentFeedback: FeedbackData = await res.json();
+
+  let productFeedback = data.productRequests;
+  const currentFeedback: any = productFeedback.filter(
+    (feedback) => feedback.id === Number(id)
+  )[0];
 
   return {
     props: {

@@ -6,6 +6,8 @@ import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { url } from "../../../lib/Constant";
+import data from "../../../data.json";
+import fs from "fs";
 
 const EditFeedback = () => {
   const router = useRouter();
@@ -26,33 +28,70 @@ const EditFeedback = () => {
     console.log(action);
 
     if (action === "save") {
-      fetch(`${url}/api/feedback/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          id: id,
-          title: title,
-          category: category,
-          upvotes: upvotes,
-          status: status,
-          description: detail,
-        }),
-      })
-        .then((res) => res.json())
-        .then(() => router.push(`${url}/feedback/${id}`));
+      // fetch(`${url}/api/feedback/${id}`, {
+      //   method: "PUT",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({
+      //     id: id,
+      //     title: title,
+      //     category: category,
+      //     upvotes: upvotes,
+      //     status: status,
+      //     description: detail,
+      //   }),
+      // })
+      //   .then((res) => res.json())
+      //   .then(() => router.push(`${url}/feedback/${id}`));
+
+      let productFeedback = data.productRequests;
+      const currentFeedback: any = productFeedback.filter(
+        (feedback) => feedback.id === Number(id)
+      )[0];
+
+      const params = {
+        id: id,
+        title: title,
+        category: category,
+        upvotes: upvotes,
+        status: status,
+        description: detail,
+      };
+
+      currentFeedback.title = params.title;
+      currentFeedback.category = params.category;
+      currentFeedback.upvotes = params.upvotes;
+      currentFeedback.status = params.status;
+      currentFeedback.description = params.description;
+
+      fs.writeFileSync("./data.json", JSON.stringify(data));
+      router.push(`${url}/feedback/${id}`);
     } else if (action === "delete") {
       const currentUrl = ["planned", "in-progress", "live"].includes(
         status.toString()
       )
         ? `${url}/roadmap`
         : `${url}`;
-      fetch(`${url}/api/feedback/${id}`, {
-        method: "DELETE",
-      })
-        .then(() => router.push(currentUrl))
-        .then(() => window.location.reload());
+
+      // fetch(`${url}/api/feedback/${id}`, {
+      //   method: "DELETE",
+      // })
+      //   .then(() => router.push(currentUrl))
+      //   .then(() => window.location.reload());
+
+      let productFeedback = data.productRequests;
+      productFeedback = productFeedback = productFeedback.filter(
+        (feedback) => feedback.id !== Number(id)
+      );
+      const newData = {
+        currentUser: data.currentUser,
+        productRequests: productFeedback,
+      };
+      fs.writeFileSync("./data.json", JSON.stringify(newData));
+
+      router.push(currentUrl);
+      window.location.reload();
     }
   };
 
