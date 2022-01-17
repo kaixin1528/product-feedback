@@ -71,7 +71,7 @@ const Index = ({ currentFeedback, id }) => {
     )[0];
     currentFeedback.upvotes = Number(params.upvotes);
     currentFeedback.upvoted = params.upvoted;
-    fs.writeFileSync("./data.json", JSON.stringify(data));
+    // fs.writeFileSync("./data.json", JSON.stringify(data));
   };
 
   const handleSubmit = async (e) => {
@@ -113,7 +113,7 @@ const Index = ({ currentFeedback, id }) => {
         : (currentFeedback["comments"] = [{ id, ...comment }]);
     }
 
-    fs.writeFileSync("./data.json", JSON.stringify(data));
+    // fs.writeFileSync("./data.json", JSON.stringify(data));
 
     window.location.reload();
   };

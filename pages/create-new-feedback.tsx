@@ -54,7 +54,7 @@ const NewFeedback = ({}) => {
     const productFeedback = data.productRequests;
     const id = productFeedback.length > 0 ? productFeedback.at(-1).id + 1 : 1;
     data.productRequests.push({ id, ...feedback });
-    fs.writeFileSync("./data.json", JSON.stringify(data));
+    // fs.writeFileSync("./data.json", JSON.stringify(data));
     router.push("/");
   };
 

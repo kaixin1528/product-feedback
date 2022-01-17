@@ -65,7 +65,7 @@ const EditFeedback = () => {
       currentFeedback.status = params.status;
       currentFeedback.description = params.description;
 
-      fs.writeFileSync("./data.json", JSON.stringify(data));
+      // fs.writeFileSync("./data.json", JSON.stringify(data));
       router.push(`${url}/feedback/${id}`);
     } else if (action === "delete") {
       const currentUrl = ["planned", "in-progress", "live"].includes(
@@ -88,7 +88,7 @@ const EditFeedback = () => {
         currentUser: data.currentUser,
         productRequests: productFeedback,
       };
-      fs.writeFileSync("./data.json", JSON.stringify(newData));
+      // fs.writeFileSync("./data.json", JSON.stringify(newData));
 
       router.push(currentUrl);
       window.location.reload();
