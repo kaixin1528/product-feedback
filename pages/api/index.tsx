@@ -29,7 +29,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           productFeedback.length > 0 ? productFeedback.at(-1).id + 1 : 1;
         data.productRequests.push({ id, ...feedback });
         fs.writeFileSync("./data.json", JSON.stringify(data));
-        return res.status(200).json({});
+        return res.status(200).json({ msg: "Successfully created a feedback" });
       } catch (error) {
         return res.end({ msg: error });
       }
@@ -42,7 +42,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         currentFeedback.upvotes = Number(params.upvotes);
         currentFeedback.upvoted = params.upvoted;
         fs.writeFileSync("./data.json", JSON.stringify(data));
-        return res.status(200).json({});
+        return res
+          .status(200)
+          .json({ msg: "Successfully upvoted the feedback" });
       } catch (error) {
         return res.end({ msg: error });
       }

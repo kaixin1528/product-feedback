@@ -45,7 +45,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         }
 
         fs.writeFileSync("./data.json", JSON.stringify(data));
-        return res.status(200).json({});
+        return res
+          .status(200)
+          .json({ msg: "Successfully added a comment to the feedback" });
       } catch (error) {
         return res.end({ msg: error });
       }
@@ -59,7 +61,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         currentFeedback.description = params.description;
 
         fs.writeFileSync("./data.json", JSON.stringify(data));
-        return res.status(200).json({});
+        return res
+          .status(200)
+          .json({ msg: "Successfully edited the feedback" });
       } catch (error) {
         return res.end({ msg: error });
       }
@@ -75,7 +79,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         };
         fs.writeFileSync("./data.json", JSON.stringify(newData));
         console.log(newData);
-        return res.status(200).json({});
+        return res
+          .status(200)
+          .json({ msg: "Successfully deleted the feedback" });
       } catch (error) {
         return res.end({ msg: error });
       }
