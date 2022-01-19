@@ -43,7 +43,7 @@ const Index = ({ currentFeedback, id }) => {
   ) => {
     e.preventDefault();
 
-    fetch(`${url}/api`, {
+    fetch(`/api`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -73,7 +73,7 @@ const Index = ({ currentFeedback, id }) => {
   };
 
   const handleSubmit = async (e) => {
-    fetch(`${url}/api/feedback/${id}`, {
+    fetch(`/api/feedback/${id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -273,65 +273,67 @@ const Index = ({ currentFeedback, id }) => {
                     </section>
                   )}
                   {/* replies */}
-                  <ul className='grid col-span-6 col-start-2 border-l pl-5 text-sm gap-2 t:gap-0 py-5'>
-                    {comment.replies?.map((currentReply, idx: number) => {
-                      return (
-                        <li key={idx}>
-                          <header className='grid grid-cols-5 t:grid-cols-7 d:grid-cols-6 items-center gap-4'>
-                            <div className='h-12 w-12 t:h-16 t:w-16'>
-                              <Image
-                                src={currentReply.user.image}
-                                alt='James'
-                                width={100}
-                                height={100}
-                                className='rounded-full'
-                              ></Image>
-                            </div>
-                            <div className='grid col-span-3 justify-self-start'>
-                              <h4 className='text-dark-indigo font-bold'>
-                                {currentReply.user.name}
+                  {comment.replies && (
+                    <ul className='grid col-span-6 col-start-2 border-l pl-5 text-sm gap-2 t:gap-0 py-5'>
+                      {comment.replies?.map((currentReply, idx: number) => {
+                        return (
+                          <li key={idx}>
+                            <header className='grid grid-cols-5 t:grid-cols-7 d:grid-cols-6 items-center gap-4'>
+                              <div className='h-12 w-12 t:h-16 t:w-16'>
+                                <Image
+                                  src={currentReply.user.image}
+                                  alt='James'
+                                  width={100}
+                                  height={100}
+                                  className='rounded-full'
+                                ></Image>
+                              </div>
+                              <div className='grid col-span-3 justify-self-start'>
+                                <h4 className='text-dark-indigo font-bold'>
+                                  {currentReply.user.name}
+                                </h4>
+                                <h4 className='text-dark-grey-blue font-light'>
+                                  @{currentReply.user.username}
+                                </h4>
+                              </div>
+                              <button
+                                type='button'
+                                className='t:col-span-3 d:col-span-2 text-ocean-blue font-semibold hover:underline justify-self-end'
+                                onClick={() => {
+                                  setReply(idx);
+                                }}
+                              >
+                                Reply
+                              </button>
+                            </header>
+                            <footer className='grid t:grid-cols-7 d:grid-cols-6 gap-5'>
+                              <h4 className='leading-7 col-span-7 t:col-start-2 text-dark-grey-blue font-light'>
+                                <span className='text-purple font-bold'>
+                                  @{currentReply.replyingTo}
+                                </span>
+                                &nbsp;&nbsp;
+                                {currentReply.content}
                               </h4>
-                              <h4 className='text-dark-grey-blue font-light'>
-                                @{currentReply.user.username}
-                              </h4>
-                            </div>
-                            <button
-                              type='button'
-                              className='t:col-span-3 d:col-span-2 text-ocean-blue font-semibold hover:underline justify-self-end'
-                              onClick={() => {
-                                setReply(idx);
-                              }}
-                            >
-                              Reply
-                            </button>
-                          </header>
-                          <footer className='grid t:grid-cols-7 d:grid-cols-6 gap-5'>
-                            <h4 className='leading-7 col-span-7 t:col-start-2 text-dark-grey-blue font-light'>
-                              <span className='text-purple font-bold'>
-                                @{currentReply.replyingTo}
-                              </span>
-                              &nbsp;&nbsp;
-                              {currentReply.content}
-                            </h4>
-                            {reply === idx && (
-                              <section className='grid col-span-7 t:col-start-2 grid-cols-7 t:grid-cols-8 items-start gap-3 bg-white rounded-lg'>
-                                <textarea
-                                  placeholder='Type your comment here'
-                                  className='col-span-5 t:col-span-6 text-dark-indigo font-light p-4 h-20 focus:outline-none focus:ring-1 focus:ring-blue-700 placeholder:text-gray-400 placeholder:text-sm resize-none bg-rice-white rounded-lg'
-                                ></textarea>
-                                <button
-                                  type='submit'
-                                  className='col-span-2 t:col-span-2 px-2 py-3 t:px-4 text-white text-xs font-semibold bg-purple rounded-xl justify-self-start'
-                                >
-                                  Post Reply
-                                </button>
-                              </section>
-                            )}
-                          </footer>
-                        </li>
-                      );
-                    })}
-                  </ul>
+                              {reply === idx && (
+                                <section className='grid col-span-7 t:col-start-2 grid-cols-7 t:grid-cols-8 items-start gap-3 bg-white rounded-lg'>
+                                  <textarea
+                                    placeholder='Type your comment here'
+                                    className='col-span-5 t:col-span-6 text-dark-indigo font-light p-4 h-20 focus:outline-none focus:ring-1 focus:ring-blue-700 placeholder:text-gray-400 placeholder:text-sm resize-none bg-rice-white rounded-lg'
+                                  ></textarea>
+                                  <button
+                                    type='submit'
+                                    className='col-span-2 t:col-span-2 px-2 py-3 t:px-4 text-white text-xs font-semibold bg-purple rounded-xl justify-self-start'
+                                  >
+                                    Post Reply
+                                  </button>
+                                </section>
+                              )}
+                            </footer>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  )}
                 </article>
               </li>
             );

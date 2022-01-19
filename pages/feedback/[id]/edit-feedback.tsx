@@ -24,7 +24,7 @@ const EditFeedback = () => {
     e.preventDefault();
 
     if (action === "save") {
-      fetch(`${url}/api/feedback/${id}`, {
+      fetch(`/api/feedback/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -70,7 +70,7 @@ const EditFeedback = () => {
         ? `${url}/roadmap`
         : `${url}`;
 
-      fetch(`${url}/api/feedback/${id}`, {
+      fetch(`/api/feedback/${id}`, {
         method: "DELETE",
       })
         .then(() => router.push(currentUrl))
