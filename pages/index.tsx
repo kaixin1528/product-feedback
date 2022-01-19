@@ -102,7 +102,6 @@ export const getStaticProps: GetStaticProps = async () => {
     method: "GET",
   });
   const feedback = await res.json();
-  // const feedback = data;
 
   return {
     props: {

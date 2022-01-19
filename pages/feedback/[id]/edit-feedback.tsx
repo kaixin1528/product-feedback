@@ -40,29 +40,6 @@ const EditFeedback = () => {
       })
         .then((res) => res.json())
         .then(() => router.push(`${url}/feedback/${id}`));
-
-      // let productFeedback = data.productRequests;
-      // const currentFeedback: any = productFeedback.filter(
-      //   (feedback) => feedback.id === Number(id)
-      // )[0];
-
-      // const params = {
-      //   id: id,
-      //   title: title,
-      //   category: category,
-      //   upvotes: upvotes,
-      //   status: status,
-      //   description: detail,
-      // };
-
-      // currentFeedback.title = params.title;
-      // currentFeedback.category = params.category;
-      // currentFeedback.upvotes = params.upvotes;
-      // currentFeedback.status = params.status;
-      // currentFeedback.description = params.description;
-
-      // fs.writeFileSync("./data.json", JSON.stringify(data));
-      // router.push(`${url}/feedback/${id}`);
     } else if (action === "delete") {
       const currentUrl = ["planned", "in-progress", "live"].includes(
         status.toString()
@@ -75,19 +52,6 @@ const EditFeedback = () => {
       })
         .then(() => router.push(currentUrl))
         .then(() => window.location.reload());
-
-      // let productFeedback = data.productRequests;
-      // productFeedback = productFeedback = productFeedback.filter(
-      //   (feedback) => feedback.id !== Number(id)
-      // );
-      // const newData = {
-      //   currentUser: data.currentUser,
-      //   productRequests: productFeedback,
-      // };
-      // fs.writeFileSync("./data.json", JSON.stringify(newData));
-
-      // router.push(currentUrl);
-      // window.location.reload();
     }
   };
 

@@ -5,7 +5,6 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { url } from "../lib/Constant";
 
 export type Feedback = {
   title: string;
@@ -41,19 +40,6 @@ const NewFeedback = ({}) => {
     })
       .then((res) => res.json())
       .then(() => router.push("/"));
-
-    // const feedback: Feedback = {
-    //   title: title,
-    //   category: category,
-    //   upvotes: 0,
-    //   status: "suggestion",
-    //   description: detail,
-    // };
-    // const productFeedback = data.productRequests;
-    // const id = productFeedback.length > 0 ? productFeedback.at(-1).id + 1 : 1;
-    // data.productRequests.push({ id, ...feedback });
-    // fs.writeFileSync("./data.json", JSON.stringify(data));
-    // router.push("/");
   };
 
   const sortVariants = {

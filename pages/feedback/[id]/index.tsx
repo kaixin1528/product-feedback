@@ -32,13 +32,16 @@ const Index = ({ currentFeedback, id }) => {
   totalComments();
 
   const [reply, setReply] = useState(-1);
+  const [replyContent, setReplyContent] = useState("");
+  const [commentId, setCommentId] = useState(-1);
+  const [replyToId, setReplyToId] = useState(-1);
   const [charactersLeft, setCharactersLeft] = useState(250);
   const [myComment, setMyComment] = useState("");
 
   const handleUpvote = async (
     e,
     upvotes: number,
-    currentId: number,
+    id: number,
     upvoted: boolean
   ) => {
     e.preventDefault();
@@ -56,24 +59,10 @@ const Index = ({ currentFeedback, id }) => {
     })
       .then((res) => res.json())
       .then(() => window.location.reload());
-
-    // let productFeedback = data.productRequests;
-
-    // const params = {
-    //   id: currentId,
-    //   upvotes: upvoted ? upvotes - 1 : upvotes + 1,
-    //   upvoted: !upvoted,
-    // };
-    // const currentFeedback: any = productFeedback.filter(
-    //   (feedback) => feedback.id === Number(params.id)
-    // )[0];
-    // currentFeedback.upvotes = Number(params.upvotes);
-    // currentFeedback.upvoted = params.upvoted;
-    // fs.writeFileSync("./data.json", JSON.stringify(data));
   };
 
-  const handleSubmit = async (e) => {
-    fetch(`/api/feedback/${id}`, {
+  const handleSubmit = async () => {
+    await fetch(`/api/feedback/${id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -86,35 +75,48 @@ const Index = ({ currentFeedback, id }) => {
           username: "velvetround",
         },
       }),
-    }).then((res) => res.json());
+    });
+  };
 
-    // let productFeedback = data.productRequests;
-    // const comment = {
-    //   content: myComment,
-    //   user: {
-    //     image: "/assets/user-images/image-zena.jpg",
-    //     name: "Zena Kelley",
-    //     username: "velvetround",
-    //   },
-    // };
-    // let totalComments = 0;
-    // productFeedback.map((feedback) => {
-    //   "comments" in feedback
-    //     ? (totalComments += feedback.comments.length)
-    //     : (totalComments += 0);
-    // });
+  const handleAddReply = async () => {
+    await fetch(`/api/feedback/${id}/reply`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: commentId,
+        reply: {
+          content: replyContent,
+          user: {
+            image: "/assets/user-images/image-zena.jpg",
+            name: "Zena Kelley",
+            username: "velvetround",
+          },
+        },
+      }),
+    });
+  };
 
-    // const id = totalComments + 1;
-
-    // {
-    //   "comments" in currentFeedback
-    //     ? currentFeedback["comments"].push({ id, ...comment })
-    //     : (currentFeedback["comments"] = [{ id, ...comment }]);
-    // }
-
-    // fs.writeFileSync("./data.json", JSON.stringify(data));
-
-    // window.location.reload();
+  const handleAddAdditionalReply = async () => {
+    await fetch(`/api/feedback/${id}/reply`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: commentId,
+        replyToId: replyToId,
+        reply: {
+          content: replyContent,
+          user: {
+            image: "/assets/user-images/image-zena.jpg",
+            name: "Zena Kelley",
+            username: "velvetround",
+          },
+        },
+      }),
+    });
   };
 
   return (
@@ -146,7 +148,7 @@ const Index = ({ currentFeedback, id }) => {
       </header>
       <section className='grid t:grid-cols-8 p-8 gap-4 text-sm text-left bg-white rounded-lg'>
         <motion.button
-          // whileHover={{ backgroundColor: "#CFD7FF" }}
+          whileHover={{ backgroundColor: "#CFD7FF" }}
           className={`group ${
             currentFeedback.upvoted
               ? "bg-ocean-blue text-white"
@@ -259,18 +261,24 @@ const Index = ({ currentFeedback, id }) => {
                     {comment.content}
                   </h4>
                   {reply === comment.id && (
-                    <section className='grid col-span-6 t:col-start-2 grid-cols-8 items-start pb-4 gap-3 bg-white rounded-lg'>
+                    <form
+                      className='grid col-span-6 t:col-start-2 grid-cols-8 items-start pb-4 gap-3 bg-white rounded-lg'
+                      onSubmit={handleAddReply}
+                    >
                       <textarea
                         placeholder='Type your comment here'
+                        value={replyContent}
+                        onChange={(e) => setReplyContent(e.target.value)}
                         className='col-span-6 text-dark-indigo font-light p-4 h-20 focus:outline-none focus:ring-1 focus:ring-blue-700 placeholder:text-gray-400 placeholder:text-sm resize-none bg-rice-white rounded-lg'
                       ></textarea>
                       <button
                         type='submit'
                         className='col-span-2 px-2 py-3 t:px-5 text-white text-xs font-semibold bg-purple rounded-xl justify-self-start'
+                        onClick={() => setCommentId(comment.id)}
                       >
                         Post Reply
                       </button>
-                    </section>
+                    </form>
                   )}
                   {/* replies */}
                   {comment.replies && (
@@ -315,18 +323,29 @@ const Index = ({ currentFeedback, id }) => {
                                 {currentReply.content}
                               </h4>
                               {reply === idx && (
-                                <section className='grid col-span-7 t:col-start-2 grid-cols-7 t:grid-cols-8 items-start gap-3 bg-white rounded-lg'>
+                                <form
+                                  className='grid col-span-7 t:col-start-2 grid-cols-7 t:grid-cols-8 items-start gap-3 bg-white rounded-lg'
+                                  onSubmit={handleAddAdditionalReply}
+                                >
                                   <textarea
                                     placeholder='Type your comment here'
+                                    value={replyContent}
+                                    onChange={(e) =>
+                                      setReplyContent(e.target.value)
+                                    }
                                     className='col-span-5 t:col-span-6 text-dark-indigo font-light p-4 h-20 focus:outline-none focus:ring-1 focus:ring-blue-700 placeholder:text-gray-400 placeholder:text-sm resize-none bg-rice-white rounded-lg'
                                   ></textarea>
                                   <button
                                     type='submit'
                                     className='col-span-2 t:col-span-2 px-2 py-3 t:px-4 text-white text-xs font-semibold bg-purple rounded-xl justify-self-start'
+                                    onClick={() => {
+                                      setCommentId(comment.id);
+                                      setReplyToId(idx);
+                                    }}
                                   >
                                     Post Reply
                                   </button>
-                                </section>
+                                </form>
                               )}
                             </footer>
                           </li>
@@ -378,11 +397,6 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     method: "GET",
   });
   const currentFeedback: FeedbackData = await res.json();
-
-  // let productFeedback = data.productRequests;
-  // const currentFeedback: any = productFeedback.filter(
-  //   (feedback) => feedback.id === Number(id)
-  // )[0];
 
   return {
     props: {
