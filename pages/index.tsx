@@ -6,7 +6,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import Menu from "../components/Menu";
 import TabletMenu from "../components/TabletMenu";
 import { url } from "../lib/Constant";
-import data from "../data.json";
 
 export type FeedbackData = {
   id: number;

@@ -17,22 +17,35 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const productFeedback = data.productRequests;
   switch (req.method) {
     case "GET":
-      return res.status(200).json(data);
+      try {
+        return res.status(200).json(data);
+      } catch (error) {
+        return res.end({ msg: error });
+      }
     case "POST":
-      const feedback = req.body;
-      const id = productFeedback.length > 0 ? productFeedback.at(-1).id + 1 : 1;
-      data.productRequests.push({ id, ...feedback });
-      fs.writeFileSync("./data.json", JSON.stringify(data));
-      return res.status(200).json({});
+      try {
+        const feedback = req.body;
+        const id =
+          productFeedback.length > 0 ? productFeedback.at(-1).id + 1 : 1;
+        data.productRequests.push({ id, ...feedback });
+        fs.writeFileSync("./data.json", JSON.stringify(data));
+        return res.status(200).json({});
+      } catch (error) {
+        return res.end({ msg: error });
+      }
     case "PUT":
-      const params = req.body;
-      const currentFeedback: any = productFeedback.filter(
-        (feedback) => feedback.id === Number(params.id)
-      )[0];
-      currentFeedback.upvotes = Number(params.upvotes);
-      currentFeedback.upvoted = params.upvoted;
-      fs.writeFileSync("./data.json", JSON.stringify(data));
-      return res.status(200).json({});
+      try {
+        const params = req.body;
+        const currentFeedback: any = productFeedback.filter(
+          (feedback) => feedback.id === Number(params.id)
+        )[0];
+        currentFeedback.upvotes = Number(params.upvotes);
+        currentFeedback.upvoted = params.upvoted;
+        fs.writeFileSync("./data.json", JSON.stringify(data));
+        return res.status(200).json({});
+      } catch (error) {
+        return res.end({ msg: error });
+      }
     default:
       return res.status(400).end(`Method ${req.method} Not Allowed`);
   }

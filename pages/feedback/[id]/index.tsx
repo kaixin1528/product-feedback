@@ -4,10 +4,7 @@ import { GetServerSideProps } from "next";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import AddFeedbackButton from "../../../components/AddFeedbackButton";
 import { url } from "../../../lib/Constant";
-import data from "../../../data.json";
-import fs from "fs";
 
 export type FeedbackData = {
   id: number;

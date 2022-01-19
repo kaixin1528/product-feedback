@@ -6,8 +6,6 @@ import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { url } from "../lib/Constant";
-import data from "../data.json";
-import fs from "fs";
 
 export type Feedback = {
   title: string;
