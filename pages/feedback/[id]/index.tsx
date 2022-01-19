@@ -286,7 +286,7 @@ const Index = ({ currentFeedback, id }) => {
                       {comment.replies?.map((currentReply, idx: number) => {
                         return (
                           <li key={idx}>
-                            <header className='grid grid-cols-5 t:grid-cols-7 d:grid-cols-6 items-center gap-4'>
+                            <header className='flex items-center gap-4'>
                               <div className='h-12 w-12 t:h-16 t:w-16'>
                                 <Image
                                   src={currentReply.user.image}
@@ -296,7 +296,7 @@ const Index = ({ currentFeedback, id }) => {
                                   className='rounded-full'
                                 ></Image>
                               </div>
-                              <div className='grid col-span-3 justify-self-start'>
+                              <div className='grow justify-self-start'>
                                 <h4 className='text-dark-indigo font-bold'>
                                   {currentReply.user.name}
                                 </h4>
@@ -306,7 +306,7 @@ const Index = ({ currentFeedback, id }) => {
                               </div>
                               <button
                                 type='button'
-                                className='t:col-span-3 d:col-span-2 text-ocean-blue font-semibold hover:underline justify-self-end'
+                                className='text-ocean-blue font-semibold hover:underline justify-self-end'
                                 onClick={() => {
                                   setReply(idx);
                                 }}
