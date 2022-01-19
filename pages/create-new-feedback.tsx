@@ -28,7 +28,7 @@ const NewFeedback = ({}) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    fetch(`/api`, {
+    fetch(`${url}/api`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

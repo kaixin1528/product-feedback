@@ -46,7 +46,7 @@ const Index = ({ currentFeedback, id }) => {
   ) => {
     e.preventDefault();
 
-    fetch(`/api`, {
+    fetch(`${url}/api`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -76,7 +76,7 @@ const Index = ({ currentFeedback, id }) => {
   };
 
   const handleSubmit = async (e) => {
-    fetch(`/api/feedback/${id}`, {
+    fetch(`${url}/api/feedback/${id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -230,7 +230,7 @@ const Index = ({ currentFeedback, id }) => {
             return (
               <li key={index} className='grid text-sm gap-2 t:gap-0 py-5'>
                 <header className='grid grid-cols-6 items-center gap-4'>
-                  <section className=''>
+                  <div className=''>
                     <Image
                       src={comment.user.image}
                       alt='user'
@@ -238,15 +238,15 @@ const Index = ({ currentFeedback, id }) => {
                       height={70}
                       className='rounded-full'
                     ></Image>
-                  </section>
-                  <section className='grid col-span-4 justify-self-start'>
+                  </div>
+                  <div className='grid col-span-4 justify-self-start'>
                     <h4 className='text-dark-indigo font-bold'>
                       {comment.user.name}
                     </h4>
                     <h4 className='text-dark-grey-blue font-light'>
                       @{comment.user.username}
                     </h4>
-                  </section>
+                  </div>
                   <button
                     type='button'
                     className='text-ocean-blue font-semibold hover:underline justify-self-end'
@@ -276,15 +276,12 @@ const Index = ({ currentFeedback, id }) => {
                     </article>
                   )}
                   {/* replies */}
-                  <ul>
+                  <ul className='grid col-span-6 col-start-2 border-l pl-5 text-sm gap-2 t:gap-0 py-5'>
                     {comment.replies?.map((currentReply, idx: number) => {
                       return (
-                        <li
-                          key={idx}
-                          className='grid col-span-6 col-start-2 border-l pl-5 text-sm gap-2 t:gap-0 py-5'
-                        >
+                        <li key={idx}>
                           <header className='grid grid-cols-5 t:grid-cols-7 d:grid-cols-6 items-center gap-4'>
-                            <section className='h-12 w-12 t:h-16 t:w-16'>
+                            <div className='h-12 w-12 t:h-16 t:w-16'>
                               <Image
                                 src={currentReply.user.image}
                                 alt='James'
@@ -292,15 +289,15 @@ const Index = ({ currentFeedback, id }) => {
                                 height={100}
                                 className='rounded-full'
                               ></Image>
-                            </section>
-                            <section className='grid col-span-3 justify-self-start'>
+                            </div>
+                            <div className='grid col-span-3 justify-self-start'>
                               <h4 className='text-dark-indigo font-bold'>
                                 {currentReply.user.name}
                               </h4>
                               <h4 className='text-dark-grey-blue font-light'>
                                 @{currentReply.user.username}
                               </h4>
-                            </section>
+                            </div>
                             <button
                               type='button'
                               className='t:col-span-3 d:col-span-2 text-ocean-blue font-semibold hover:underline justify-self-end'
