@@ -181,7 +181,7 @@ const Index = ({ currentFeedback, id }) => {
             {currentFeedback.upvotes}
           </h4>
         </motion.button>
-        <article className='grid t:col-span-6 gap-2'>
+        <section className='grid t:col-span-6 gap-2'>
           <h3 className='t:text-lg text-dark-indigo font-bold'>
             {currentFeedback.title}
           </h3>
@@ -193,7 +193,7 @@ const Index = ({ currentFeedback, id }) => {
               {currentFeedback.category}
             </h4>
           </section>
-        </article>
+        </section>
         <section className='grid grid-cols-2 t:grid-cols-1 text-sm'>
           <button className='t:hidden grid grid-flow-col auto-cols-max items-center py-2 px-5 gap-2 font-bold bg-moderate-rice-white rounded-xl justify-self-start'>
             <svg width='10' height='7' xmlns='http://www.w3.org/2000/svg'>
@@ -262,7 +262,7 @@ const Index = ({ currentFeedback, id }) => {
                     {comment.content}
                   </h4>
                   {reply === comment.id && (
-                    <article className='grid col-span-6 t:col-start-2 grid-cols-8 items-start pb-4 gap-3 bg-white rounded-lg'>
+                    <section className='grid col-span-6 t:col-start-2 grid-cols-8 items-start pb-4 gap-3 bg-white rounded-lg'>
                       <textarea
                         placeholder='Type your comment here'
                         className='col-span-6 text-dark-indigo font-light p-4 h-20 focus:outline-none focus:ring-1 focus:ring-blue-700 placeholder:text-gray-400 placeholder:text-sm resize-none bg-rice-white rounded-lg'
@@ -273,7 +273,7 @@ const Index = ({ currentFeedback, id }) => {
                       >
                         Post Reply
                       </button>
-                    </article>
+                    </section>
                   )}
                   {/* replies */}
                   <ul className='grid col-span-6 col-start-2 border-l pl-5 text-sm gap-2 t:gap-0 py-5'>
@@ -317,7 +317,7 @@ const Index = ({ currentFeedback, id }) => {
                               {currentReply.content}
                             </h4>
                             {reply === idx && (
-                              <article className='grid col-span-7 t:col-start-2 grid-cols-7 t:grid-cols-8 items-start gap-3 bg-white rounded-lg'>
+                              <section className='grid col-span-7 t:col-start-2 grid-cols-7 t:grid-cols-8 items-start gap-3 bg-white rounded-lg'>
                                 <textarea
                                   placeholder='Type your comment here'
                                   className='col-span-5 t:col-span-6 text-dark-indigo font-light p-4 h-20 focus:outline-none focus:ring-1 focus:ring-blue-700 placeholder:text-gray-400 placeholder:text-sm resize-none bg-rice-white rounded-lg'
@@ -328,7 +328,7 @@ const Index = ({ currentFeedback, id }) => {
                                 >
                                   Post Reply
                                 </button>
-                              </article>
+                              </section>
                             )}
                           </footer>
                         </li>

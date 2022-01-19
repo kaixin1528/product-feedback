@@ -13,10 +13,10 @@ const Roadmap = ({ feedback }) => {
   return (
     <main className='grid bg-rice-white d:pb-10'>
       <header className='grid grid-cols-2 p-6 t:px-12 t:py-8 d:mx-40 d:mt-10 d:rounded-lg bg-dark-indigo'>
-        <section className='grid text-white gap-1'>
+        <div className='grid text-white gap-1'>
           <ReturnButton arrowColor='#F2F4FF' textColor='text-white' />
           <h3 className='text-xl font-bold'>Roadmap</h3>
-        </section>
+        </div>
       </header>
       {/* <section className='t:hidden grid grid-cols-3 pt-5 text-sm text-black text-opacity-30 border-b justify-items-center'>
         <StatusButton

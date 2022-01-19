@@ -45,14 +45,14 @@ export default function Home({ feedback }) {
       <section className='grid d:grid-cols-4 d:items-start'>
         <section className='grid t:grid-cols-3 d:grid-cols-1 d:p-0 t:p-12 t:gap-3 d:gap-6 bg-rice-white'>
           <header className='grid grid-cols-2 t:grid-cols-1 items-center t:items-end d:h-40 d:px-8 py-4 px-6 t:rounded-lg text-white bg-no-repeat bg-center bg-cover bg-m-header t:bg-t-header d:bg-d-header'>
-            <section className='grid'>
+            <div className='grid'>
               <h3 className='font-semibold t:font-bold t:text-lg text-left'>
                 Fullstack Project
               </h3>
               <h5 className='text-xs t:text-sm text-white text-opacity-70 font-medium'>
                 Feedback Board
               </h5>
-            </section>
+            </div>
             <motion.button
               whileHover={{ scale: 1.1 }}
               className='justify-self-end t:hidden'

@@ -70,7 +70,7 @@ const NewFeedback = ({}) => {
         onSubmit={handleSubmit}
         className='grid p-6 mb-16 gap-8 t:px-10 d:px-12 text-sm t:text-base bg-white rounded-xl'
       >
-        <motion.section
+        <motion.div
           initial={{ y: -50 }}
           animate={{
             y: 0,
@@ -79,19 +79,19 @@ const NewFeedback = ({}) => {
           className='-mt-12'
         >
           <Image src={icon} alt='icon'></Image>
-        </motion.section>
+        </motion.div>
         <h2 className='text-lg t:text-2xl text-dark-indigo font-bold'>
           Create New Feedback
         </h2>
         <section className='grid gap-4 text-sm'>
-          <article className='grid gap-1'>
+          <div className='grid gap-1'>
             <h4 className='text-base text-dark-indigo font-bold'>
               Feedback Title
             </h4>
             <p className='text-dark-grey-blue font-light'>
               Add a short, descriptive headline
             </p>
-          </article>
+          </div>
           <textarea
             name='title'
             id='title'
@@ -100,13 +100,13 @@ const NewFeedback = ({}) => {
             className='text-dark-indigo font-light px-5 py-3 h-12 resize-none focus:outline-none focus:ring-1 focus:ring-blue-700 bg-rice-white rounded-lg'
           ></textarea>
         </section>
-        <article className='grid gap-4 text-sm'>
-          <article className='grid gap-1'>
+        <section className='grid gap-4 text-sm'>
+          <section className='grid gap-1'>
             <h4 className='text-base text-dark-indigo font-bold'>Category</h4>
             <p className='text-dark-grey-blue font-light'>
               Choose a category for your feedback
             </p>
-          </article>
+          </section>
           <section className='grid'>
             <button
               type='button'
@@ -144,7 +144,7 @@ const NewFeedback = ({}) => {
               </motion.svg>
             </button>
             {openCategory && (
-              <article className='grid sectionide-y mt-3 -mb-[16rem] z-10 text-indigo bg-white rounded-lg shadow-xl'>
+              <section className='grid sectionide-y mt-3 -mb-[16rem] z-10 text-indigo bg-white rounded-lg shadow-xl'>
                 <button
                   type='button'
                   className='py-3 pr-10 pl-5 text-left font-light hover:text-purple'
@@ -195,12 +195,12 @@ const NewFeedback = ({}) => {
                 >
                   Bug
                 </button>
-              </article>
+              </section>
             )}
           </section>
-        </article>
-        <article className='grid gap-4 text-sm'>
-          <article className='grid gap-1'>
+        </section>
+        <section className='grid gap-4 text-sm'>
+          <section className='grid gap-1'>
             <h4 className='text-base text-dark-indigo font-bold'>
               Feedback Detail
             </h4>
@@ -208,7 +208,7 @@ const NewFeedback = ({}) => {
               Include any specific comments on what should be improved, added,
               etc.
             </p>
-          </article>
+          </section>
           <textarea
             name='detail'
             id='detail'
@@ -216,7 +216,7 @@ const NewFeedback = ({}) => {
             onChange={(e) => setDetail(e.target.value)}
             className='text-dark-indigo font-light gap-7 p-5 h-36 resize-none focus:outline-none focus:ring-1 focus:ring-blue-700 bg-rice-white rounded-lg'
           ></textarea>
-        </article>
+        </section>
         <footer className='grid text-xs t:grid-cols-4 t:justify-content-end t:gap-0 mt-3 gap-3'>
           <motion.button
             whileHover={{ opacity: 0.5, transition: { duration: 0.2 } }}
