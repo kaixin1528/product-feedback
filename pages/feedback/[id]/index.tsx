@@ -46,76 +46,78 @@ const Index = ({ currentFeedback, id }) => {
   ) => {
     e.preventDefault();
 
-    // fetch(`${url}/api`, {
-    //   method: "PUT",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     id: id,
-    //     upvotes: upvoted ? upvotes - 1 : upvotes + 1,
-    //     upvoted: !upvoted,
-    //   }),
-    // })
-    //   .then((res) => res.json())
-    //   .then(() => window.location.reload());
-    let productFeedback = data.productRequests;
+    fetch(`/api`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: id,
+        upvotes: upvoted ? upvotes - 1 : upvotes + 1,
+        upvoted: !upvoted,
+      }),
+    })
+      .then((res) => res.json())
+      .then(() => window.location.reload());
 
-    const params = {
-      id: currentId,
-      upvotes: upvoted ? upvotes - 1 : upvotes + 1,
-      upvoted: !upvoted,
-    };
-    const currentFeedback: any = productFeedback.filter(
-      (feedback) => feedback.id === Number(params.id)
-    )[0];
-    currentFeedback.upvotes = Number(params.upvotes);
-    currentFeedback.upvoted = params.upvoted;
+    // let productFeedback = data.productRequests;
+
+    // const params = {
+    //   id: currentId,
+    //   upvotes: upvoted ? upvotes - 1 : upvotes + 1,
+    //   upvoted: !upvoted,
+    // };
+    // const currentFeedback: any = productFeedback.filter(
+    //   (feedback) => feedback.id === Number(params.id)
+    // )[0];
+    // currentFeedback.upvotes = Number(params.upvotes);
+    // currentFeedback.upvoted = params.upvoted;
     // fs.writeFileSync("./data.json", JSON.stringify(data));
   };
 
   const handleSubmit = async (e) => {
-    // fetch(`${url}/api/feedback/${id}`, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     content: myComment,
-    //     user: {
-    //       image: "/assets/user-images/image-zena.jpg",
-    //       name: "Zena Kelley",
-    //       username: "velvetround",
-    //     },
-    //   }),
-    // }).then((res) => res.json());
-    let productFeedback = data.productRequests;
-    const comment = {
-      content: myComment,
-      user: {
-        image: "/assets/user-images/image-zena.jpg",
-        name: "Zena Kelley",
-        username: "velvetround",
+    fetch(`/api/feedback/${id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
-    };
-    let totalComments = 0;
-    productFeedback.map((feedback) => {
-      "comments" in feedback
-        ? (totalComments += feedback.comments.length)
-        : (totalComments += 0);
-    });
+      body: JSON.stringify({
+        content: myComment,
+        user: {
+          image: "/assets/user-images/image-zena.jpg",
+          name: "Zena Kelley",
+          username: "velvetround",
+        },
+      }),
+    }).then((res) => res.json());
 
-    const id = totalComments + 1;
+    // let productFeedback = data.productRequests;
+    // const comment = {
+    //   content: myComment,
+    //   user: {
+    //     image: "/assets/user-images/image-zena.jpg",
+    //     name: "Zena Kelley",
+    //     username: "velvetround",
+    //   },
+    // };
+    // let totalComments = 0;
+    // productFeedback.map((feedback) => {
+    //   "comments" in feedback
+    //     ? (totalComments += feedback.comments.length)
+    //     : (totalComments += 0);
+    // });
 
-    {
-      "comments" in currentFeedback
-        ? currentFeedback["comments"].push({ id, ...comment })
-        : (currentFeedback["comments"] = [{ id, ...comment }]);
-    }
+    // const id = totalComments + 1;
 
-    fs.writeFileSync("./data.json", JSON.stringify(data));
+    // {
+    //   "comments" in currentFeedback
+    //     ? currentFeedback["comments"].push({ id, ...comment })
+    //     : (currentFeedback["comments"] = [{ id, ...comment }]);
+    // }
 
-    window.location.reload();
+    // fs.writeFileSync("./data.json", JSON.stringify(data));
+
+    // window.location.reload();
   };
 
   return (
@@ -376,15 +378,15 @@ export default Index;
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const id = params.id;
-  // const res: Response = await fetch(`${url}/api/feedback/${id}`, {
-  //   method: "GET",
-  // });
-  // const currentFeedback: FeedbackData = await res.json();
+  const res: Response = await fetch(`${url}/api/feedback/${id}`, {
+    method: "GET",
+  });
+  const currentFeedback: FeedbackData = await res.json();
 
-  let productFeedback = data.productRequests;
-  const currentFeedback: any = productFeedback.filter(
-    (feedback) => feedback.id === Number(id)
-  )[0];
+  // let productFeedback = data.productRequests;
+  // const currentFeedback: any = productFeedback.filter(
+  //   (feedback) => feedback.id === Number(id)
+  // )[0];
 
   return {
     props: {

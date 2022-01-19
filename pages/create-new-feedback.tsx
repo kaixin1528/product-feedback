@@ -28,34 +28,34 @@ const NewFeedback = ({}) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // fetch(`${url}/api`, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     title: title,
-    //     category: category,
-    //     upvotes: 0,
-    //     status: "suggestion",
-    //     description: detail,
-    //   }),
-    // })
-    //   .then((res) => res.json())
-    //   .then(() => router.push("/"));
+    fetch(`/api`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: title,
+        category: category,
+        upvotes: 0,
+        status: "suggestion",
+        description: detail,
+      }),
+    })
+      .then((res) => res.json())
+      .then(() => router.push("/"));
 
-    const feedback: Feedback = {
-      title: title,
-      category: category,
-      upvotes: 0,
-      status: "suggestion",
-      description: detail,
-    };
-    const productFeedback = data.productRequests;
-    const id = productFeedback.length > 0 ? productFeedback.at(-1).id + 1 : 1;
-    data.productRequests.push({ id, ...feedback });
-    fs.writeFileSync("./data.json", JSON.stringify(data));
-    router.push("/");
+    // const feedback: Feedback = {
+    //   title: title,
+    //   category: category,
+    //   upvotes: 0,
+    //   status: "suggestion",
+    //   description: detail,
+    // };
+    // const productFeedback = data.productRequests;
+    // const id = productFeedback.length > 0 ? productFeedback.at(-1).id + 1 : 1;
+    // data.productRequests.push({ id, ...feedback });
+    // fs.writeFileSync("./data.json", JSON.stringify(data));
+    // router.push("/");
   };
 
   const sortVariants = {

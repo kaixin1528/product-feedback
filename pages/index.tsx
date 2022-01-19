@@ -99,11 +99,11 @@ export default function Home({ feedback }) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  // const res = await fetch(`${url}/api`, {
-  //   method: "GET",
-  // });
-  // const feedback = await res.json();
-  const feedback = data;
+  const res = await fetch(`${url}/api`, {
+    method: "GET",
+  });
+  const feedback = await res.json();
+  // const feedback = data;
 
   return {
     props: {
