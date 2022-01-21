@@ -37,9 +37,7 @@ const NewFeedback = ({}) => {
         status: "suggestion",
         description: detail,
       }),
-    })
-      .then((res) => res.json())
-      .then(() => router.push("/"));
+    }).then(() => router.push("/"));
   };
 
   const sortVariants = {

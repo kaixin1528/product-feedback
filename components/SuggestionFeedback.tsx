@@ -34,7 +34,7 @@ const SuggestionFeedback = ({ productRequests, filter }) => {
     })
     .filter(Boolean).length;
 
-  const handleSubmit = async (
+  const handleUpvote = async (
     e,
     upvotes: number,
     id: number,
@@ -42,7 +42,7 @@ const SuggestionFeedback = ({ productRequests, filter }) => {
   ) => {
     e.preventDefault();
 
-    fetch("http://localhost:3000/api", {
+    fetch("/api", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -52,9 +52,7 @@ const SuggestionFeedback = ({ productRequests, filter }) => {
         upvotes: upvoted ? upvotes - 1 : upvotes + 1,
         upvoted: !upvoted,
       }),
-    })
-      .then((res) => res.json())
-      .then(() => window.location.reload());
+    }).then(() => window.location.reload());
   };
 
   const sortVariants = {
@@ -63,7 +61,7 @@ const SuggestionFeedback = ({ productRequests, filter }) => {
   };
 
   return (
-    <main className='grid d:col-span-3'>
+    <section className='grid d:col-span-3'>
       <header className='grid grid-cols-2 t:grid-cols-3 t:mx-12 d:mx-8 t:rounded-lg items-center text-xs py-3 px-6 gap-2 text-white bg-indigo'>
         <section className='t:grid grid-flow-col auto-cols-max items-center gap-3 hidden'>
           <Image src={suggestion} alt='suggestion'></Image>
@@ -148,7 +146,7 @@ const SuggestionFeedback = ({ productRequests, filter }) => {
         </section>
         <AddFeedbackButton position='justify-self-end' filter={filter} />
       </header>
-      <section className='grid py-10 d:py-5 px-6 t:px-12 d:px-8 gap-5 bg-rice-white'>
+      <ul className='grid py-10 d:py-5 px-6 t:px-12 d:px-8 gap-5 bg-rice-white'>
         {productRequests?.map((feedback: FeedbackData, index: number) => {
           const comments = feedback.comments;
           let totalReplies = 0;
@@ -164,7 +162,7 @@ const SuggestionFeedback = ({ productRequests, filter }) => {
           return (
             feedback.status === "suggestion" &&
             feedback.category.includes(filter) && (
-              <motion.article
+              <motion.li
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1, transition: { duration: 1.5 } }}
                 viewport={{ once: true }}
@@ -181,7 +179,7 @@ const SuggestionFeedback = ({ productRequests, filter }) => {
                       : "bg-moderate-rice-white"
                   } hidden t:grid t:grid-flow-row t:justify-items-center t:self-start t:px-3 grid-flow-col auto-cols-max items-center py-2 px-5 gap-1 font-bold rounded-xl justify-self-start`}
                   onClick={(e) =>
-                    handleSubmit(
+                    handleUpvote(
                       e,
                       feedback.upvotes,
                       feedback.id,
@@ -235,7 +233,7 @@ const SuggestionFeedback = ({ productRequests, filter }) => {
                         : "bg-moderate-rice-white"
                     } t:hidden grid grid-flow-col auto-cols-max items-center py-2 px-5 gap-2 font-bold rounded-xl justify-self-start`}
                     onClick={(e) =>
-                      handleSubmit(
+                      handleUpvote(
                         e,
                         feedback.upvotes,
                         feedback.id,
@@ -281,7 +279,7 @@ const SuggestionFeedback = ({ productRequests, filter }) => {
                     </h4>
                   </article>
                 </article>
-              </motion.article>
+              </motion.li>
             )
           );
         })}
@@ -305,8 +303,8 @@ const SuggestionFeedback = ({ productRequests, filter }) => {
             </section>
           </section>
         )}
-      </section>
-    </main>
+      </ul>
+    </section>
   );
 };
 

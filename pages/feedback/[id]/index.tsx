@@ -56,9 +56,7 @@ const Index = ({ currentFeedback, id }) => {
         upvotes: upvoted ? upvotes - 1 : upvotes + 1,
         upvoted: !upvoted,
       }),
-    })
-      .then((res) => res.json())
-      .then(() => window.location.reload());
+    }).then(() => window.location.reload());
   };
 
   const handleSubmit = async () => {

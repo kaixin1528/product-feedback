@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const Menu = ({ productRequests, filter, onFilter, onOpenMenu }) => {
   return (
-    <main className='min-h-screen p-6 ml-[7.5rem] gap-5 bg-rice-white'>
+    <aside className='min-h-screen p-6 ml-[7.5rem] gap-5 bg-rice-white'>
       <nav className='grid grid-cols-3 text-xs p-5 mb-5 gap-3 text-ocean-blue bg-white rounded-lg'>
         <motion.button
           id=''
@@ -140,7 +140,7 @@ const Menu = ({ productRequests, filter, onFilter, onOpenMenu }) => {
           </article>
         </article>
       </section>
-    </main>
+    </aside>
   );
 };
 

@@ -37,9 +37,7 @@ const EditFeedback = () => {
           status: status,
           description: detail,
         }),
-      })
-        .then((res) => res.json())
-        .then(() => router.push(`${url}/feedback/${id}`));
+      }).then(() => router.push(`${url}/feedback/${id}`));
     } else if (action === "delete") {
       const currentUrl = ["planned", "in-progress", "live"].includes(
         status.toString()

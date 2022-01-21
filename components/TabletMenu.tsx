@@ -11,7 +11,7 @@ const TabletMenu = ({ productRequests, filter, onFilter }) => {
   };
 
   return (
-    <main className='hidden t:grid t:col-span-2 t:grid-cols-2 d:grid-cols-1 d:col-span-1 t:p-0 t:ml-0 t:gap-3 d:gap-6 bg-rice-white'>
+    <aside className='hidden t:grid t:col-span-2 t:grid-cols-2 d:grid-cols-1 d:col-span-1 t:p-0 t:ml-0 t:gap-3 d:gap-6 bg-rice-white'>
       <AnimatePresence exitBeforeEnter>
         <motion.nav className='grid grid-cols-3 text-xs p-5 d:px-8 gap-3 text-ocean-blue bg-white rounded-lg'>
           <motion.button
@@ -139,7 +139,7 @@ const TabletMenu = ({ productRequests, filter, onFilter }) => {
           </article>
         </article>
       </section>
-    </main>
+    </aside>
   );
 };
 
