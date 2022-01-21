@@ -15,7 +15,6 @@ export type FeedbackData = {
 
 const StatusFeedback = ({
   productRequests,
-  status,
   currentStatus,
   description,
   borderColor,
@@ -29,11 +28,7 @@ const StatusFeedback = ({
   };
 
   return (
-    <main
-      className={`grid py-10 px-6 t:px-2 gap-5 ${
-        status !== currentStatus ? "visible" : "visible"
-      } `}
-    >
+    <main className='grid py-10 px-6 t:px-2 gap-5'>
       <article className='grid gap-1'>
         <h3 className='capitalize text-lg text-dark-indigo font-bold'>
           {currentStatus} (
