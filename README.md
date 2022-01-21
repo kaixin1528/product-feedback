@@ -124,6 +124,32 @@ send a PUT request and a body of stringified content to the server side.
   };
 ```
 
+After sending the PUT request, I wrote the corresponding API logic as shown below. To permanently store the data, in the server side code,
+I used the fs module to overwrite the json file.
+
+```js
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
+  const productFeedback = data.productRequests;
+  switch (req.method) {
+    ...
+    case "PUT":
+      try {
+        const params = req.body;
+        const currentFeedback: any = productFeedback.filter(
+          (feedback) => feedback.id === Number(params.id)
+        )[0];
+        currentFeedback.upvotes = Number(params.upvotes);
+        currentFeedback.upvoted = params.upvoted;
+        fs.writeFileSync("./data.json", JSON.stringify(data));
+        return res
+          .status(200)
+          .json({ msg: "Successfully upvoted the feedback" });
+      } catch (error) {
+        return res.end({ msg: error });
+      }
+
+```
+
 This was also the first project in which I used Typescript, or Javascript with static typing. Due to this, there were many instances 
 where I had to include the type for the constant.
 
