@@ -147,6 +147,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       } catch (error) {
         return res.end({ msg: error });
       }
+  }
+}
 
 ```
 
