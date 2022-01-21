@@ -37,13 +37,13 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ### Project Summary
 
 Product feedback is a responsive CRUD website grouping together feedback for a product. On this website, 
-one can add/remove/edit/ feedback, 
+one can add/remove/edit/read feedback. Inside each feedback page, one can write and interact with the comment section. 
 
 
 ### Links
 
 - Live Site URL: [https://kaixin-product-feedback.netlify.app](https://kaixin-product-feedback.netlify.app)
-  - Note: The Live Version did not enable CRUD functionality. To check for CRUD operations, please install all the 
+  Note: The Live Version did not enable CRUD functionality. To check for CRUD operations, please install all the 
   necessary dependencies and open on localhost:3000.
 
 ## My process
