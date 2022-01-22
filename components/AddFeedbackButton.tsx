@@ -1,8 +1,15 @@
-import Link from "next/link";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
-const AddFeedbackButton = ({ position, filter }) => {
+
+const AddFeedbackButton = ({
+  position,
+  filter,
+}: {
+  position: string;
+  filter: string;
+}) => {
   const router = useRouter();
+
   return (
     <motion.button
       whileHover={{ opacity: 0.8, transition: { duration: 0.2 } }}

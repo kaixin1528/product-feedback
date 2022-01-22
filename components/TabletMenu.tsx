@@ -1,6 +1,15 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-const TabletMenu = ({ productRequests, filter, onFilter }) => {
+
+const TabletMenu = ({
+  productRequests,
+  filter,
+  onFilter,
+}: {
+  productRequests: any[];
+  filter: string;
+  onFilter: Function;
+}) => {
   const filterVariants = {
     hidden: { backgroundColor: "#F2F4FF" },
     visible: {

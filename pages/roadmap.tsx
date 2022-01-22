@@ -1,10 +1,19 @@
 import ReturnButton from "../components/ReturnButton";
 import { GetStaticProps } from "next";
 import StatusFeedback from "../components/StatusFeedback";
-import { useState } from "react";
 import { url } from "../lib/Constant";
 
-const Roadmap = ({ feedback }) => {
+export interface FeedbackData {
+  id: number;
+  title: string;
+  category: string;
+  upvotes: number;
+  status: string;
+  description: string;
+  comments?: any[];
+}
+
+const Roadmap = ({ feedback }: { feedback: FeedbackData }) => {
   const productRequests: any[] = feedback["productRequests"];
 
   return (

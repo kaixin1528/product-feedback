@@ -7,7 +7,7 @@ import Menu from "../components/Menu";
 import TabletMenu from "../components/TabletMenu";
 import { url } from "../lib/Constant";
 
-export type FeedbackData = {
+export interface FeedbackData {
   id: number;
   title: string;
   category: string;
@@ -15,12 +15,12 @@ export type FeedbackData = {
   status: string;
   description: string;
   comments?: any[];
-};
+}
 
-export default function Home({ feedback }) {
+export default function Home({ feedback }: { feedback: FeedbackData }) {
   const productRequests: any[] = feedback["productRequests"];
-  const [openMenu, setOpenMenu] = useState(false);
-  const [filter, setFilter] = useState("");
+  const [openMenu, setOpenMenu] = useState<boolean>(false);
+  const [filter, setFilter] = useState<string>("");
 
   const menuVariants = {
     hidden: {
@@ -31,7 +31,7 @@ export default function Home({ feedback }) {
     visible: {
       x: 0,
       opacity: 1,
-      transition: { type: "spring", duration: 3, stiffness: 110 },
+      transition: { type: "spring", stiffness: 100 },
     },
   };
 

@@ -1,7 +1,17 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 
-const Menu = ({ productRequests, filter, onFilter, onOpenMenu }) => {
+const Menu = ({
+  productRequests,
+  filter,
+  onFilter,
+  onOpenMenu,
+}: {
+  productRequests: any[];
+  filter: string;
+  onFilter: Function;
+  onOpenMenu: Function;
+}) => {
   return (
     <aside className='min-h-screen p-6 ml-[7.5rem] gap-5 bg-rice-white'>
       <nav className='grid grid-cols-3 text-xs p-5 mb-5 gap-3 text-ocean-blue bg-white rounded-lg'>

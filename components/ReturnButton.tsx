@@ -1,5 +1,12 @@
 import Link from "next/link";
-const ReturnButton = ({ arrowColor, textColor }) => {
+
+const ReturnButton = ({
+  arrowColor,
+  textColor,
+}: {
+  arrowColor: string;
+  textColor: string;
+}) => {
   return (
     <Link href='/' passHref>
       <button className='grid grid-flow-col auto-cols-max items-center hover:underline gap-4'>

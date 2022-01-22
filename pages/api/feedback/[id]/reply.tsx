@@ -1,32 +1,22 @@
 import data from "../../../../data.json";
-import { NextApiRequest, NextApiResponse } from "next";
 import fs from "fs";
-
-export type FeedbackData = {
-  id: number;
-  title: string;
-  category: string;
-  upvotes: number;
-  upvoted: boolean;
-  status: string;
-  description: string;
-  comments?: any[];
-};
+import { NextApiRequest, NextApiResponse } from "next";
+import { FeedbackData, Reply, Comment } from "../../../../lib/Constant";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  let productFeedback = data.productRequests;
-  const currentFeedback: any = productFeedback.filter(
-    (feedback) => feedback.id === Number(req.query.id)
+  let productFeedback: any[] = data.productRequests;
+  const currentFeedback: FeedbackData = productFeedback.filter(
+    (feedback: FeedbackData) => feedback.id === Number(req.query.id)
   )[0];
 
   switch (req.method) {
     case "POST":
       try {
-        const currentComment = currentFeedback.comments.filter(
-          (comment) => comment.id === Number(req.body.id)
+        const currentComment: Comment = currentFeedback.comments.filter(
+          (comment: Comment) => comment.id === Number(req.body.id)
         )[0];
 
-        const reply = req.body.reply;
+        const reply: Reply = req.body.reply;
         reply.replyingTo = currentComment.user.username;
 
         {
@@ -44,11 +34,11 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       }
     case "PUT":
       try {
-        const currentComment = currentFeedback.comments.filter(
-          (comment) => comment.id === Number(req.body.id)
+        const currentComment: Comment = currentFeedback.comments.filter(
+          (comment: Comment) => comment.id === Number(req.body.id)
         )[0];
 
-        const reply = req.body.reply;
+        const reply: Reply = req.body.reply;
         reply.replyingTo =
           currentComment.replies[req.body.replyToId].user.username;
 

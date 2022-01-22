@@ -11,20 +11,24 @@ const EditFeedback = () => {
   const router = useRouter();
 
   const id = router.query.id;
-  const [title, setTitle] = useState(router.query.title);
-  const [category, setCategory] = useState(router.query.category);
-  const [upvotes, setUpvotes] = useState(router.query.upvotes);
-  const [status, setStatus] = useState(router.query.status);
-  const [detail, setDetail] = useState(router.query.detail);
-  const [openCategory, setOpenCategory] = useState(false);
-  const [openStatus, setOpenStatus] = useState(false);
-  const [action, setAction] = useState("");
+  const [title, setTitle] = useState<string | string[]>(router.query.title);
+  const [category, setCategory] = useState<string | string[]>(
+    router.query.category
+  );
+  const [upvotes, setUpvotes] = useState<string | string[]>(
+    router.query.upvotes
+  );
+  const [status, setStatus] = useState<string | string[]>(router.query.status);
+  const [detail, setDetail] = useState<string | string[]>(router.query.detail);
+  const [openCategory, setOpenCategory] = useState<boolean>(false);
+  const [openStatus, setOpenStatus] = useState<boolean>(false);
+  const [action, setAction] = useState<string>("");
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (action === "save") {
-      fetch(`/api/feedback/${id}`, {
+      await fetch(`/api/feedback/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -37,7 +41,8 @@ const EditFeedback = () => {
           status: status,
           description: detail,
         }),
-      }).then(() => router.push(`${url}/feedback/${id}`));
+      });
+      router.push(`${url}/feedback/${id}`);
     } else if (action === "delete") {
       const currentUrl = ["planned", "in-progress", "live"].includes(
         status.toString()
@@ -45,11 +50,11 @@ const EditFeedback = () => {
         ? `${url}/roadmap`
         : `${url}`;
 
-      fetch(`/api/feedback/${id}`, {
+      await fetch(`/api/feedback/${id}`, {
         method: "DELETE",
-      })
-        .then(() => router.push(currentUrl))
-        .then(() => window.location.reload());
+      });
+      router.push(currentUrl);
+      window.location.reload();
     }
   };
 

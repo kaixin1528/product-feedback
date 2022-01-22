@@ -6,22 +6,17 @@ import suggestion from "../public/assets/suggestions/icon-suggestions.svg";
 import AddFeedbackButton from "./AddFeedbackButton";
 import { useState } from "react";
 import SortFeedback from "../lib/SortFeedback";
+import { FeedbackData } from "../lib/Constant";
 
-export type FeedbackData = {
-  id: number;
-  title: string;
-  category: string;
-  upvotes: number;
-  upvoted: boolean;
-  status: string;
-  description: string;
-  comments: any[];
-};
-
-const SuggestionFeedback = ({ productRequests, filter }) => {
-  const [openSort, setOpenSort] = useState(false);
-  const [sortBy, setSortBy] = useState("Most Upvotes");
-
+const SuggestionFeedback = ({
+  productRequests,
+  filter,
+}: {
+  productRequests: any[];
+  filter: string;
+}) => {
+  const [openSort, setOpenSort] = useState<boolean>(false);
+  const [sortBy, setSortBy] = useState<string>("Most Upvotes");
   const router = useRouter();
 
   const numSuggestions: number = productRequests
@@ -35,14 +30,14 @@ const SuggestionFeedback = ({ productRequests, filter }) => {
     .filter(Boolean).length;
 
   const handleUpvote = async (
-    e,
+    e: React.MouseEvent<HTMLButtonElement>,
     upvotes: number,
     id: number,
     upvoted: boolean
   ) => {
     e.preventDefault();
 
-    fetch("/api", {
+    await fetch("/api", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -52,7 +47,8 @@ const SuggestionFeedback = ({ productRequests, filter }) => {
         upvotes: upvoted ? upvotes - 1 : upvotes + 1,
         upvoted: !upvoted,
       }),
-    }).then(() => window.location.reload());
+    });
+    window.location.reload();
   };
 
   const sortVariants = {

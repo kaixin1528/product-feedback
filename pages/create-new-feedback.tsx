@@ -6,26 +6,19 @@ import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
-export type Feedback = {
-  title: string;
-  category: string;
-  upvotes: number;
-  status: string;
-  description: string;
-};
-const NewFeedback = ({}) => {
+const NewFeedback = () => {
   const router = useRouter();
   const filter: string =
     router.query.filter === "" ? "feature" : (router.query.filter as string);
-  const [title, setTitle] = useState("");
-  const [category, setCategory] = useState(filter);
-  const [detail, setDetail] = useState("");
-  const [openCategory, setOpenCategory] = useState(false);
+  const [title, setTitle] = useState<string>("");
+  const [category, setCategory] = useState<string>(filter);
+  const [detail, setDetail] = useState<string>("");
+  const [openCategory, setOpenCategory] = useState<boolean>(false);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    fetch(`/api`, {
+    await fetch(`/api`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -36,8 +29,10 @@ const NewFeedback = ({}) => {
         upvotes: 0,
         status: "suggestion",
         description: detail,
+        upvoted: false,
       }),
-    }).then(() => router.push("/"));
+    });
+    router.push("/");
   };
 
   const sortVariants = {

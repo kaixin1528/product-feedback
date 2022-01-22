@@ -1,22 +1,12 @@
 import data from "../../../../data.json";
-import { NextApiRequest, NextApiResponse } from "next";
 import fs from "fs";
-
-export type FeedbackData = {
-  id: number;
-  title: string;
-  category: string;
-  upvotes: number;
-  upvoted: boolean;
-  status: string;
-  description: string;
-  comments?: any[];
-};
+import { NextApiRequest, NextApiResponse } from "next";
+import { FeedbackData, Comment, EditFeedback } from "../../../../lib/Constant";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  let productFeedback = data.productRequests;
-  const currentFeedback: any = productFeedback.filter(
-    (feedback) => feedback.id === Number(req.query.id)
+  let productFeedback: any[] = data.productRequests;
+  const currentFeedback: FeedbackData = productFeedback.filter(
+    (feedback: FeedbackData) => feedback.id === Number(req.query.id)
   )[0];
 
   switch (req.method) {
@@ -28,15 +18,15 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       }
     case "POST":
       try {
-        const comment = req.body;
-        let totalComments = 0;
-        productFeedback.map((feedback) => {
+        const comment: Comment = req.body;
+        let totalComments: number = 0;
+        productFeedback.map((feedback: FeedbackData) => {
           "comments" in feedback
             ? (totalComments += feedback.comments.length)
             : (totalComments += 0);
         });
 
-        const id = totalComments + 1;
+        const id: number = totalComments + 1;
 
         {
           "comments" in currentFeedback
@@ -53,7 +43,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       }
     case "PUT":
       try {
-        const params = req.body;
+        const params: EditFeedback = req.body;
         currentFeedback.title = params.title;
         currentFeedback.category = params.category;
         currentFeedback.upvotes = params.upvotes;
@@ -70,7 +60,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     case "DELETE":
       try {
         productFeedback = productFeedback.filter(
-          (feedback) => feedback.id !== Number(req.query.id)
+          (feedback: FeedbackData) => feedback.id !== Number(req.query.id)
         );
 
         const newData = {

@@ -1,26 +1,21 @@
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import { useState } from "react";
-
-export type FeedbackData = {
-  id: number;
-  title: string;
-  category: string;
-  upvotes: number;
-  upvoted: boolean;
-  status: string;
-  description: string;
-  comments: any[];
-};
+import { FeedbackData } from "../lib/Constant";
 
 const StatusFeedback = ({
   productRequests,
   currentStatus,
   description,
   borderColor,
+}: {
+  productRequests: any[];
+  currentStatus: string;
+  description: string;
+  borderColor: string;
 }) => {
   const router = useRouter();
-  const [upvote, setUpvote] = useState(-1);
+  const [upvote, setUpvote] = useState<number>(-1);
 
   const hoverFocusVariants = {
     hover: { backgroundColor: "#CFD7FF" },

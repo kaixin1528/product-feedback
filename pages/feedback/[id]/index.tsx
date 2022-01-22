@@ -5,22 +5,18 @@ import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { url } from "../../../lib/Constant";
+import { FeedbackData, Comment } from "../../../lib/Constant";
 
-export type FeedbackData = {
-  id: number;
-  title: string;
-  category: string;
-  upvotes: number;
-  upvoted: boolean;
-  status: string;
-  description: string;
-  comments?: any[];
-};
-
-const Index = ({ currentFeedback, id }) => {
+const Index = ({
+  currentFeedback,
+  id,
+}: {
+  currentFeedback: FeedbackData;
+  id: string;
+}) => {
   const router = useRouter();
-  const comments = currentFeedback.comments;
-  let totalReplies = 0;
+  const comments: Comment[] = currentFeedback.comments;
+  let totalReplies: number = 0;
   const totalComments = () => {
     if (comments) {
       comments.map((comment: any) => {
@@ -31,22 +27,22 @@ const Index = ({ currentFeedback, id }) => {
   };
   totalComments();
 
-  const [reply, setReply] = useState(-1);
-  const [replyContent, setReplyContent] = useState("");
-  const [commentId, setCommentId] = useState(-1);
-  const [replyToId, setReplyToId] = useState(-1);
-  const [charactersLeft, setCharactersLeft] = useState(250);
-  const [myComment, setMyComment] = useState("");
+  const [reply, setReply] = useState<number>(-1);
+  const [replyContent, setReplyContent] = useState<string>("");
+  const [commentId, setCommentId] = useState<number>(-1);
+  const [replyToId, setReplyToId] = useState<number>(-1);
+  const [charactersLeft, setCharactersLeft] = useState<number>(250);
+  const [myComment, setMyComment] = useState<string>("");
 
   const handleUpvote = async (
-    e,
+    e: React.MouseEvent<HTMLButtonElement>,
     upvotes: number,
     id: number,
     upvoted: boolean
   ) => {
     e.preventDefault();
 
-    fetch(`/api`, {
+    await fetch(`/api`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -56,7 +52,8 @@ const Index = ({ currentFeedback, id }) => {
         upvotes: upvoted ? upvotes - 1 : upvotes + 1,
         upvoted: !upvoted,
       }),
-    }).then(() => window.location.reload());
+    });
+    window.location.reload();
   };
 
   const handleSubmit = async () => {
@@ -391,10 +388,10 @@ export default Index;
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const id = params.id;
-  const res: Response = await fetch(`${url}/api/feedback/${id}`, {
+  const res = await fetch(`${url}/api/feedback/${id}`, {
     method: "GET",
   });
-  const currentFeedback: FeedbackData = await res.json();
+  const currentFeedback = await res.json();
 
   return {
     props: {

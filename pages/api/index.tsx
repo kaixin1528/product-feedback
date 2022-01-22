@@ -1,20 +1,10 @@
 import data from "../../data.json";
-import { NextApiRequest, NextApiResponse } from "next";
 import fs from "fs";
-
-export type FeedbackData = {
-  id: number;
-  title: string;
-  category: string;
-  upvotes: number | string;
-  upvoted: boolean;
-  status: string;
-  description: string;
-  comments?: any[];
-};
+import { NextApiRequest, NextApiResponse } from "next";
+import { FeedbackData, NewFeedback, Upvoted } from "../../lib/Constant";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  const productFeedback = data.productRequests;
+  const productFeedback: any[] = data.productRequests;
   switch (req.method) {
     case "GET":
       try {
@@ -24,8 +14,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       }
     case "POST":
       try {
-        const feedback = req.body;
-        const id =
+        const feedback: NewFeedback = req.body;
+        const id: number =
           productFeedback.length > 0 ? productFeedback.at(-1).id + 1 : 1;
         data.productRequests.push({ id, ...feedback });
         fs.writeFileSync("./data.json", JSON.stringify(data));
@@ -35,9 +25,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       }
     case "PUT":
       try {
-        const params = req.body;
-        const currentFeedback: any = productFeedback.filter(
-          (feedback) => feedback.id === Number(params.id)
+        const params: Upvoted = req.body;
+        const currentFeedback: FeedbackData = productFeedback.filter(
+          (feedback: FeedbackData) => feedback.id === Number(params.id)
         )[0];
         currentFeedback.upvotes = Number(params.upvotes);
         currentFeedback.upvoted = params.upvoted;
