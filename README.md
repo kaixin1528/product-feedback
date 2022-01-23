@@ -179,4 +179,4 @@ CRUD operations are only accessible through the local host.
 
 ## Author
 
-- Portfolio Website - [Kaixin Huang](https://www.kaixin-portfolio.netlify.app)
+- Portfolio Website - [Kaixin Huang](https://kaixin-portfolio.netlify.app)
