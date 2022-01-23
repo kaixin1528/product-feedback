@@ -44,7 +44,7 @@ one can add/remove/edit/read feedback. Inside each feedback page, one can intera
 
 - [Live Site URL](https://kaixin-product-feedback.netlify.app)
 
-  Note: The Live Version does not provide CRUD functionality. To check for CRUD functionality, please install all the 
+  Note: The Live Version does not provide CRUD functionalities. To check for CRUD functionalities, please install all the 
   necessary dependencies and open on the local host.
 
 ## My process
