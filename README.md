@@ -57,8 +57,8 @@ one can add/remove/edit/read feedback. Inside each feedback page, one can intera
 - CSS Grid
 - Typescript
 - Mobile-first workflow
-- [Next](https://nextjs.org/) 
-- [Tailwind](https://tailwindcss.com/) 
+- Next
+- Tailwind
 
 
 ### What I learned
