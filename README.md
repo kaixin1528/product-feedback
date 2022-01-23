@@ -42,7 +42,7 @@ one can add/remove/edit/read feedback. Inside each feedback page, one can intera
 
 ### Links
 
-- Live Site URL: [https://kaixin-product-feedback.netlify.app](https://kaixin-product-feedback.netlify.app)
+- [Live Site URL](https://kaixin-product-feedback.netlify.app)
   Note: The Live Version did not enable CRUD functionality. To check for CRUD operations, please install all the 
   necessary dependencies and open on localhost:3000.
 
