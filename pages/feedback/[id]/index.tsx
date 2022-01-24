@@ -114,7 +114,7 @@ const Index = ({
   };
 
   return (
-    <main className='grid px-6 py-8 t:px-12 t:py-12 d:px-96 d:py-16 gap-6 bg-rice-white'>
+    <main className='grid px-6 py-8 t:py-12 t:px-40 lg:px-80 d:px-96 d:py-16 gap-6 bg-rice-white'>
       <header className='grid grid-cols-2'>
         <ReturnButton arrowColor='#4661E6' textColor='text-indigo' />
         <motion.button
@@ -140,14 +140,14 @@ const Index = ({
           Edit Feedback
         </motion.button>
       </header>
-      <section className='grid t:grid-cols-8 p-8 gap-4 text-sm text-left bg-white rounded-lg'>
+      <section className='grid t:flex p-8 gap-4 d:gap-10 text-sm text-left bg-white rounded-lg'>
         <motion.button
           whileHover={{ backgroundColor: "#CFD7FF" }}
           className={`group ${
             currentFeedback.upvoted
               ? "bg-ocean-blue text-white"
               : "bg-moderate-rice-white"
-          } hidden t:grid t:grid-flow-row t:justify-items-center t:px-4 grid-flow-col auto-cols-max items-center t:self-start py-2 px-5 gap-1 font-bold rounded-xl justify-self-start`}
+          } hidden t:grid t:grid-flow-row t:justify-items-center t:px-3 items-center t:self-start py-2 px-5 gap-1 font-bold rounded-xl justify-self-start`}
           onClick={(e) =>
             handleUpvote(
               e,
@@ -174,8 +174,8 @@ const Index = ({
             {currentFeedback.upvotes}
           </h4>
         </motion.button>
-        <article className='grid t:col-span-6 gap-2'>
-          <h3 className='t:text-lg text-dark-indigo font-bold'>
+        <article className='grow gap-2'>
+          <h3 className='text-base t:text-lg text-dark-indigo font-bold'>
             {currentFeedback.title}
           </h3>
           <article className='grid gap-3'>
@@ -188,18 +188,39 @@ const Index = ({
           </article>
         </article>
         <article className='grid grid-cols-2 t:grid-cols-1 text-sm'>
-          <button className='t:hidden grid grid-flow-col auto-cols-max items-center py-2 px-5 gap-2 font-bold bg-moderate-rice-white rounded-xl justify-self-start'>
+          <motion.button
+            whileHover={{ backgroundColor: "#CFD7FF" }}
+            className={`group ${
+              currentFeedback.upvoted
+                ? "bg-ocean-blue text-white"
+                : "bg-moderate-rice-white"
+            }  t:hidden flex items-center py-2 px-3 gap-2 font-bold rounded-xl justify-self-start`}
+            onClick={(e) =>
+              handleUpvote(
+                e,
+                currentFeedback.upvotes,
+                currentFeedback.id,
+                currentFeedback.upvoted
+              )
+            }
+          >
             <svg width='10' height='7' xmlns='http://www.w3.org/2000/svg'>
               <path
                 d='M1 6l4-4 4 4'
-                stroke='#4661E6'
+                stroke={currentFeedback.upvoted ? "white" : "#4661E6"}
                 strokeWidth='2'
                 fill='none'
                 fillRule='evenodd'
               />
             </svg>
-            <p className='text-dark-indigo'>{currentFeedback.upvotes}</p>
-          </button>
+            <h4
+              className={`${
+                currentFeedback.upvoted ? "text-white" : "text-dark-indigo"
+              }`}
+            >
+              {currentFeedback.upvotes}
+            </h4>
+          </motion.button>
           <article className='grid grid-flow-col auto-cols-max items-center py-2 px-5 gap-2 font-bold justify-self-end'>
             <svg width='18' height='16' xmlns='http://www.w3.org/2000/svg'>
               <path

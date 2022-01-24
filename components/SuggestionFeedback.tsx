@@ -199,7 +199,7 @@ const SuggestionFeedback = ({
                   <motion.button
                     whileHover={{ color: "#4661E6" }}
                     type='submit'
-                    className='text-left text-dark-indigo font-bold t:text-base'
+                    className='text-left text-dark-indigo font-bold text-base'
                     onClick={() => router.push(`/feedback/${feedback.id}`)}
                   >
                     {feedback.title}
@@ -222,7 +222,7 @@ const SuggestionFeedback = ({
                       feedback.upvoted
                         ? "bg-ocean-blue"
                         : "bg-moderate-rice-white"
-                    } t:hidden grid grid-flow-col auto-cols-max items-center py-2 px-5 gap-2 font-bold rounded-xl justify-self-start`}
+                    } t:hidden grid grid-flow-col auto-cols-max items-center py-2 px-3 gap-2 font-bold rounded-xl justify-self-start`}
                     onClick={(e) =>
                       handleUpvote(
                         e,

@@ -4,6 +4,12 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    screens: {
+      t: "768px",
+      md: "800px",
+      lg: "1100px",
+      d: "1300px",
+    },
     extend: {
       backgroundColor: {
         flesh: "#F49F85",
@@ -51,10 +57,6 @@ module.exports = {
           "url('../public/assets/suggestions/tablet/background-header.png')",
         "d-header":
           "url('../public/assets/suggestions/desktop/background-header.png')",
-      },
-      screens: {
-        t: "768px",
-        d: "1100px",
       },
     },
   },
