@@ -42,9 +42,10 @@ one can add/remove/edit/read feedback. Inside each feedback page, one can intera
 
 ### Links
 
-- Live Site URL: [https://kaixin-product-feedback.netlify.app](https://kaixin-product-feedback.netlify.app)
-  Note: The Live Version did not enable CRUD functionality. To check for CRUD operations, please install all the 
-  necessary dependencies and open on localhost:3000.
+- [Live Site URL](https://kaixin-product-feedback.netlify.app)
+
+  Note: The live version does not provide CRUD functionalities. To check for CRUD functionalities, please install all the 
+  necessary dependencies and open on the local host.
 
 ## My process
 
@@ -55,9 +56,9 @@ one can add/remove/edit/read feedback. Inside each feedback page, one can intera
 - CSS custom properties
 - CSS Grid
 - Typescript
+- Next
+- Tailwind CSS
 - Mobile-first workflow
-- [Next](https://nextjs.org/) 
-- [Tailwind](https://tailwindcss.com/) 
 
 
 ### What I learned
@@ -178,4 +179,4 @@ CRUD operations are only accessible through the local host.
 
 ## Author
 
-- Portfolio Website - [Kaixin Huang](https://www.kaixin-portfolio.netlify.app)
+- Portfolio Website - [Kaixin Huang](https://kaixin-portfolio.netlify.app)
