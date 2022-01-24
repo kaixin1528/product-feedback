@@ -4,8 +4,7 @@ import { GetServerSideProps } from "next";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { url } from "../../../lib/Constant";
-import { FeedbackData, Comment } from "../../../lib/Constant";
+import { url, FeedbackData, Comment } from "../../../lib/Constant";
 
 const Index = ({
   currentFeedback,
@@ -56,7 +55,7 @@ const Index = ({
     window.location.reload();
   };
 
-  const handleSubmit = async () => {
+  const handleAddComment = async () => {
     await fetch(`/api/feedback/${id}`, {
       method: "POST",
       headers: {
@@ -175,20 +174,20 @@ const Index = ({
             {currentFeedback.upvotes}
           </h4>
         </motion.button>
-        <section className='grid t:col-span-6 gap-2'>
+        <article className='grid t:col-span-6 gap-2'>
           <h3 className='t:text-lg text-dark-indigo font-bold'>
             {currentFeedback.title}
           </h3>
-          <section className='grid gap-3'>
+          <article className='grid gap-3'>
             <p className='text-dark-grey-blue font-light'>
               {currentFeedback.description}
             </p>
             <h4 className='capitalize text-xs py-2 px-4 text-ocean-blue font-bold bg-moderate-rice-white rounded-xl justify-self-start'>
               {currentFeedback.category}
             </h4>
-          </section>
-        </section>
-        <section className='grid grid-cols-2 t:grid-cols-1 text-sm'>
+          </article>
+        </article>
+        <article className='grid grid-cols-2 t:grid-cols-1 text-sm'>
           <button className='t:hidden grid grid-flow-col auto-cols-max items-center py-2 px-5 gap-2 font-bold bg-moderate-rice-white rounded-xl justify-self-start'>
             <svg width='10' height='7' xmlns='http://www.w3.org/2000/svg'>
               <path
@@ -201,7 +200,7 @@ const Index = ({
             </svg>
             <p className='text-dark-indigo'>{currentFeedback.upvotes}</p>
           </button>
-          <section className='grid grid-flow-col auto-cols-max items-center py-2 px-5 gap-2 font-bold justify-self-end'>
+          <article className='grid grid-flow-col auto-cols-max items-center py-2 px-5 gap-2 font-bold justify-self-end'>
             <svg width='18' height='16' xmlns='http://www.w3.org/2000/svg'>
               <path
                 d='M2.62 16H1.346l.902-.91c.486-.491.79-1.13.872-1.823C1.036 11.887 0 9.89 0 7.794 0 3.928 3.52 0 9.03 0 14.87 0 18 3.615 18 7.455c0 3.866-3.164 7.478-8.97 7.478-1.017 0-2.078-.137-3.025-.388A4.705 4.705 0 012.62 16z'
@@ -210,8 +209,8 @@ const Index = ({
               />
             </svg>
             <h4 className='text-dark-indigo'>{comments ? totalReplies : 0}</h4>
-          </section>
-        </section>
+          </article>
+        </article>
       </section>
       {/* Comments */}
       <article className='grid px-6 pt-8 pb-4 t:px-12 gap-2 bg-white rounded-lg'>
@@ -233,14 +232,14 @@ const Index = ({
                       className='rounded-full'
                     ></Image>
                   </div>
-                  <div className='grid col-span-4 justify-self-start'>
+                  <article className='grid col-span-4 justify-self-start'>
                     <h4 className='text-dark-indigo font-bold'>
                       {comment.user.name}
                     </h4>
                     <h4 className='text-dark-grey-blue font-light'>
                       @{comment.user.username}
                     </h4>
-                  </div>
+                  </article>
                   <button
                     type='button'
                     className='text-ocean-blue font-semibold hover:underline justify-self-end'
@@ -291,14 +290,14 @@ const Index = ({
                                   className='rounded-full'
                                 ></Image>
                               </div>
-                              <div className='grow justify-self-start'>
+                              <article className='grow justify-self-start'>
                                 <h4 className='text-dark-indigo font-bold'>
                                   {currentReply.user.name}
                                 </h4>
                                 <h4 className='text-dark-grey-blue font-light'>
                                   @{currentReply.user.username}
                                 </h4>
-                              </div>
+                              </article>
                               <button
                                 type='button'
                                 className='text-ocean-blue font-semibold hover:underline justify-self-end'
@@ -356,7 +355,7 @@ const Index = ({
       </article>
       <form
         className='grid px-6 py-8 t:px-12 gap-5 bg-white rounded-lg'
-        onSubmit={handleSubmit}
+        onSubmit={handleAddComment}
       >
         <h3 className='text-lg text-dark-indigo font-bold'>Add Comment</h3>
         <textarea

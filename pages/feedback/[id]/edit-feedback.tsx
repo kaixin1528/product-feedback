@@ -24,7 +24,7 @@ const EditFeedback = () => {
   const [openStatus, setOpenStatus] = useState<boolean>(false);
   const [action, setAction] = useState<string>("");
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSaveFeedback = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (action === "save") {
@@ -63,9 +63,9 @@ const EditFeedback = () => {
       <ReturnButton arrowColor='#4661E6' textColor='text-indigo' />
       <form
         className='grid p-6 mb-12 gap-8 t:px-10 d:px-12 text-sm bg-white rounded-xl'
-        onSubmit={handleSubmit}
+        onSubmit={handleSaveFeedback}
       >
-        <motion.section
+        <motion.div
           initial={{ y: -50 }}
           animate={{
             y: 0,
@@ -74,17 +74,17 @@ const EditFeedback = () => {
           className='-mt-11'
         >
           <Image src={icon} alt='icon' width={60} height={60}></Image>
-        </motion.section>
+        </motion.div>
         <h2 className='text-lg t:text-2xl t:pb-12 text-dark-indigo font-bold'>
           Editing &apos;{title}&apos;
         </h2>
-        <section className='grid gap-4'>
-          <section className='grid gap-1'>
+        <article className='grid gap-4'>
+          <article className='grid gap-1'>
             <h4 className=' text-dark-indigo font-bold'>Feedback Title</h4>
             <p className='text-dark-grey-blue font-light'>
               Add a short, descriptive headline
             </p>
-          </section>
+          </article>
           <textarea
             name='title'
             id='title'
@@ -92,14 +92,14 @@ const EditFeedback = () => {
             onChange={(e) => setTitle(e.target.value)}
             className='text-dark-indigo font-light px-5 py-3 h-12 resize-none focus:outline-none focus:ring-1 focus:ring-blue-700 bg-rice-white rounded-lg'
           ></textarea>
-        </section>
-        <section className='grid gap-4'>
-          <section className='grid gap-1'>
+        </article>
+        <article className='grid gap-4'>
+          <article className='grid gap-1'>
             <h4 className='text-dark-indigo font-bold'>Category</h4>
             <p className='text-dark-grey-blue font-light'>
               Choose a category for your feedback
             </p>
-          </section>
+          </article>
           <button
             type='button'
             name='title'
@@ -126,7 +126,7 @@ const EditFeedback = () => {
             </svg>
           </button>
           {openCategory && (
-            <section className='grid sectionide-y -mb-[14rem] z-10 text-indigo bg-white rounded-lg shadow-xl'>
+            <article className='grid sectionide-y -mb-[14rem] z-10 text-indigo bg-white rounded-lg shadow-xl'>
               <button
                 type='button'
                 className='py-3 pr-10 pl-5 text-left font-light hover:text-purple'
@@ -177,16 +177,16 @@ const EditFeedback = () => {
               >
                 Bug
               </button>
-            </section>
+            </article>
           )}
-        </section>
-        <section className='grid gap-4'>
-          <section className='grid gap-1'>
+        </article>
+        <article className='grid gap-4'>
+          <article className='grid gap-1'>
             <h4 className='text-dark-indigo font-bold'>Update Status</h4>
             <p className='text-dark-grey-blue font-light'>
               Change feature state
             </p>
-          </section>
+          </article>
           <button
             type='button'
             name='title'
@@ -213,7 +213,7 @@ const EditFeedback = () => {
             </svg>
           </button>
           {openStatus && (
-            <section className='grid sectionide-y -mb-[14rem] z-10 text-indigo bg-white rounded-lg shadow-xl'>
+            <article className='grid sectionide-y -mb-[14rem] z-10 text-indigo bg-white rounded-lg shadow-xl'>
               <button
                 type='button'
                 className='py-3 pr-10 pl-5 text-left font-light hover:text-purple'
@@ -254,17 +254,17 @@ const EditFeedback = () => {
               >
                 Live
               </button>
-            </section>
+            </article>
           )}
-        </section>
-        <section className='grid gap-4'>
-          <section className='grid gap-1'>
+        </article>
+        <article className='grid gap-4'>
+          <article className='grid gap-1'>
             <h4 className='text-dark-indigo font-bold'>Feedback Detail</h4>
             <p className='text-dark-grey-blue font-light'>
               Include any specific comments on what should be improved, added,
               etc.
             </p>
-          </section>
+          </article>
           <textarea
             name='title'
             id='title'
@@ -272,7 +272,7 @@ const EditFeedback = () => {
             onChange={(e) => setDetail(e.target.value)}
             className='text-dark-indigo font-light p-5 h-36 resize-none focus:outline-none focus:ring-1 focus:ring-blue-700 bg-rice-white rounded-lg'
           ></textarea>
-        </section>
+        </article>
         <footer className='grid t:grid-cols-4 mt-3 gap-3 text-xs'>
           <motion.button
             whileHover={{ opacity: 0.5, transition: { duration: 0.2 } }}

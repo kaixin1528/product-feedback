@@ -6,7 +6,7 @@ import suggestion from "../public/assets/suggestions/icon-suggestions.svg";
 import AddFeedbackButton from "./AddFeedbackButton";
 import { useState } from "react";
 import SortFeedback from "../lib/SortFeedback";
-import { FeedbackData } from "../lib/Constant";
+import { FeedbackData, sortVariants } from "../lib/Constant";
 
 const SuggestionFeedback = ({
   productRequests,
@@ -51,22 +51,17 @@ const SuggestionFeedback = ({
     window.location.reload();
   };
 
-  const sortVariants = {
-    up: { rotate: 180 },
-    down: { rotate: 0 },
-  };
-
   return (
     <section className='grid d:col-span-3'>
       <header className='grid grid-cols-2 t:grid-cols-3 t:mx-12 d:mx-8 t:rounded-lg items-center text-xs py-3 px-6 gap-2 text-white bg-indigo'>
-        <section className='t:grid grid-flow-col auto-cols-max items-center gap-3 hidden'>
+        <article className='t:grid grid-flow-col auto-cols-max items-center gap-3 hidden'>
           <Image src={suggestion} alt='suggestion'></Image>
           <h4 className='text-base font-bold'>
             {numSuggestions}{" "}
             {numSuggestions <= 1 ? "Suggestion" : "Suggestions"}
           </h4>
-        </section>
-        <section
+        </article>
+        <article
           className='grid grid-cols-8 t:col-start-2'
           onClick={() => {
             setOpenSort(!openSort);
@@ -74,7 +69,7 @@ const SuggestionFeedback = ({
         >
           <button className='grid grid-flow-col auto-cols-max gap-1'>
             <h4 className='font-light'>Sort by :</h4>
-            <section
+            <article
               className={`grid grid-flow-col auto-cols-max items-center gap-2`}
             >
               <h4 className='font-semibold'> {sortBy}</h4>
@@ -93,10 +88,10 @@ const SuggestionFeedback = ({
                   fillRule='evenodd'
                 />
               </motion.svg>
-            </section>
+            </article>
           </button>
           {openSort && (
-            <section className='grid col-span-8 sectionide-y mt-10 -mb-[14rem] z-10 text-indigo bg-white rounded-lg shadow-xl'>
+            <article className='grid col-span-8 sectionide-y mt-10 -mb-[14rem] z-10 text-indigo bg-white rounded-lg shadow-xl'>
               <button
                 className='py-3 pr-10 pl-5 text-left font-light hover:text-purple'
                 onClick={() => {
@@ -137,9 +132,9 @@ const SuggestionFeedback = ({
               >
                 Least Comments
               </button>
-            </section>
+            </article>
           )}
-        </section>
+        </article>
         <AddFeedbackButton position='justify-self-end' filter={filter} />
       </header>
       <ul className='grid py-10 d:py-5 px-6 t:px-12 d:px-8 gap-5 bg-rice-white'>
@@ -209,14 +204,14 @@ const SuggestionFeedback = ({
                   >
                     {feedback.title}
                   </motion.button>
-                  <section className='grid gap-3'>
+                  <article className='grid gap-3'>
                     <p className='text-dark-grey-blue font-light'>
                       {feedback.description}
                     </p>
                     <h4 className='capitalize mt-2 py-3 px-5 text-xs text-ocean-blue font-bold bg-moderate-rice-white rounded-xl justify-self-start'>
                       {feedback.category}
                     </h4>
-                  </section>
+                  </article>
                 </article>
                 <article className='grid grid-cols-2 text-sm'>
                   <motion.button
@@ -280,11 +275,11 @@ const SuggestionFeedback = ({
           );
         })}
         {!numSuggestions && (
-          <section className='grid py-10 px-6 t:px-12 h-screen bg-rice-white'>
-            <section className='grid py-28 px-10 gap-3 t:gap-12 text-center bg-white rounded-lg'>
-              <section className=''>
+          <article className='grid py-10 px-6 t:px-12 h-screen bg-rice-white'>
+            <article className='grid py-28 px-10 gap-3 t:gap-12 text-center bg-white rounded-lg'>
+              <div className=''>
                 <Image src={empty} alt='empty' height={120}></Image>
-              </section>
+              </div>
               <h2 className='text-2xl text-indigo font-bold'>
                 There is no feedback yet.
               </h2>
@@ -296,8 +291,8 @@ const SuggestionFeedback = ({
                 position='mx-auto px-4 py-0 t:py-3'
                 filter={filter}
               />
-            </section>
-          </section>
+            </article>
+          </article>
         )}
       </ul>
     </section>

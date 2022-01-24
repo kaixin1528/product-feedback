@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { filterVariants } from "../lib/Constant";
 
 const TabletMenu = ({
   productRequests,
@@ -10,15 +11,6 @@ const TabletMenu = ({
   filter: string;
   onFilter: Function;
 }) => {
-  const filterVariants = {
-    hidden: { backgroundColor: "#F2F4FF" },
-    visible: {
-      backgroundColor: "#4661E6",
-      color: "white",
-      transition: { duration: 0.2 },
-    },
-  };
-
   return (
     <aside className='hidden t:grid t:col-span-2 t:grid-cols-2 d:grid-cols-1 d:col-span-1 t:p-0 t:ml-0 t:gap-3 d:gap-6 bg-rice-white'>
       <AnimatePresence exitBeforeEnter>
@@ -109,7 +101,7 @@ const TabletMenu = ({
         </nav>
         <article className='grid gap-2 text-sm'>
           <article className='grid grid-cols-8 gap-2 items-center'>
-            <section className='h-2.5 w-2.5 bg-orange rounded-full'></section>
+            <div className='h-2.5 w-2.5 bg-orange rounded-full'></div>
             <h4 className='col-span-6 capitalize text-indigo font-light'>
               Planned
             </h4>
@@ -122,7 +114,7 @@ const TabletMenu = ({
             </h4>
           </article>
           <article className='grid grid-cols-8 gap-2 items-center'>
-            <section className='h-2.5 w-2.5 bg-purple rounded-full'></section>
+            <div className='h-2.5 w-2.5 bg-purple rounded-full'></div>
             <h4 className='col-span-6 capitalize text-indigo font-light'>
               In-Progress
             </h4>
@@ -135,7 +127,7 @@ const TabletMenu = ({
             </h4>
           </article>
           <article className='grid grid-cols-8 gap-2 items-center'>
-            <section className='h-2.5 w-2.5 bg-cyan rounded-full'></section>
+            <div className='h-2.5 w-2.5 bg-cyan rounded-full'></div>
             <h4 className='col-span-6 capitalize text-indigo font-light'>
               Live
             </h4>

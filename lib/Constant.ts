@@ -57,3 +57,35 @@ export interface Reply {
     username: string;
   };
 }
+
+export const menuVariants = {
+  hidden: {
+    x: 500,
+    opacity: 0,
+    transition: { type: "spring", duration: 0.8 },
+  },
+  visible: {
+    x: 0,
+    opacity: 1,
+    transition: { type: "spring", stiffness: 100 },
+  },
+};
+
+export const sortVariants = {
+  up: { rotate: 180 },
+  down: { rotate: 0 },
+};
+
+export const hoverFocusVariants = {
+  hover: { backgroundColor: "#CFD7FF" },
+  focus: { backgroundColor: "#4661E6", color: "white" },
+};
+
+export const filterVariants = {
+  hidden: { backgroundColor: "#F2F4FF" },
+  visible: {
+    backgroundColor: "#4661E6",
+    color: "white",
+    transition: { duration: 0.2 },
+  },
+};

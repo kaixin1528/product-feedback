@@ -1,17 +1,7 @@
 import ReturnButton from "../components/ReturnButton";
 import { GetStaticProps } from "next";
 import StatusFeedback from "../components/StatusFeedback";
-import { url } from "../lib/Constant";
-
-export interface FeedbackData {
-  id: number;
-  title: string;
-  category: string;
-  upvotes: number;
-  status: string;
-  description: string;
-  comments?: any[];
-}
+import { url, FeedbackData } from "../lib/Constant";
 
 const Roadmap = ({ feedback }: { feedback: FeedbackData }) => {
   const productRequests: any[] = feedback["productRequests"];
@@ -19,10 +9,10 @@ const Roadmap = ({ feedback }: { feedback: FeedbackData }) => {
   return (
     <main className='grid bg-rice-white d:pb-10'>
       <header className='grid grid-cols-2 p-6 t:px-12 t:py-8 d:mx-40 d:mt-10 d:rounded-lg bg-dark-indigo'>
-        <div className='grid text-white gap-1'>
+        <article className='grid text-white gap-1'>
           <ReturnButton arrowColor='#F2F4FF' textColor='text-white' />
           <h3 className='text-xl font-bold'>Roadmap</h3>
-        </div>
+        </article>
       </header>
       <section className='grid t:grid-cols-3 t:items-start t:px-10 d:mx-28 bg-rice-white'>
         <StatusFeedback

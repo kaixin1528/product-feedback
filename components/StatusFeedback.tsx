@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { FeedbackData } from "../lib/Constant";
+import { FeedbackData, hoverFocusVariants } from "../lib/Constant";
 
 const StatusFeedback = ({
   productRequests,
@@ -16,11 +16,6 @@ const StatusFeedback = ({
 }) => {
   const router = useRouter();
   const [upvote, setUpvote] = useState<number>(-1);
-
-  const hoverFocusVariants = {
-    hover: { backgroundColor: "#CFD7FF" },
-    focus: { backgroundColor: "#4661E6", color: "white" },
-  };
 
   return (
     <section className='grid py-10 px-6 t:px-2 gap-5'>
@@ -47,9 +42,9 @@ const StatusFeedback = ({
               className={`grid p-8 gap-4 text-sm text-left bg-white rounded-lg shadow-sm`}
             >
               <article className='grid grid-flow-col auto-cols-max gap-2 items-center'>
-                <section
+                <div
                   className={`h-2.5 w-2.5 bg-${borderColor} rounded-full`}
-                ></section>
+                ></div>
                 <h4 className='capitalize text-black text-opacity-50 font-light'>
                   {currentStatus}
                 </h4>
@@ -76,7 +71,7 @@ const StatusFeedback = ({
                   className='group grid t:grid-flow-row t:justify-items-center t:px-4 t:self-start justify-self-start py-2 px-5 gap-1 font-bold bg-moderate-rice-white rounded-xl'
                   onClick={() => setUpvote(feedback.id)}
                 >
-                  <section className='justify-self-center'>
+                  <div className='justify-self-center'>
                     <svg
                       width='10'
                       height='7'
@@ -90,7 +85,7 @@ const StatusFeedback = ({
                         fillRule='evenodd'
                       />
                     </svg>
-                  </section>
+                  </div>
                   <h4 className='group-focus:text-white text-dark-indigo'>
                     {feedback.upvotes}
                   </h4>

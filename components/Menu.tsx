@@ -111,7 +111,7 @@ const Menu = ({
         </nav>
         <article className='grid gap-2 text-sm'>
           <article className='grid grid-cols-8 gap-2 items-center'>
-            <section className='h-2.5 w-2.5 bg-orange rounded-full'></section>
+            <div className='h-2.5 w-2.5 bg-orange rounded-full'></div>
             <h4 className='col-span-6 capitalize text-indigo font-light'>
               Planned
             </h4>
@@ -124,7 +124,7 @@ const Menu = ({
             </h4>
           </article>
           <article className='grid grid-cols-8 gap-2 items-center'>
-            <section className='h-2.5 w-2.5 bg-purple rounded-full'></section>
+            <div className='h-2.5 w-2.5 bg-purple rounded-full'></div>
             <h4 className='col-span-6 capitalize text-indigo font-light'>
               In-Progress
             </h4>
@@ -137,7 +137,7 @@ const Menu = ({
             </h4>
           </article>
           <article className='grid grid-cols-8 gap-2 items-center'>
-            <section className='h-2.5 w-2.5 bg-cyan rounded-full'></section>
+            <div className='h-2.5 w-2.5 bg-cyan rounded-full'></div>
             <h4 className='col-span-6 capitalize text-indigo font-light'>
               Live
             </h4>
